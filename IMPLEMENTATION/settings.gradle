@@ -1,0 +1,6 @@
+rootProject.name = 'IMPLEMENTATION'
+include 'client'
+include 'client'
+include 'server'
+include 'common'
+
