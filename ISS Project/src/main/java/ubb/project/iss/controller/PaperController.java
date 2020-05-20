@@ -1,9 +1,7 @@
 package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Paper;
 import ubb.project.iss.service.PaperServiceImpl;
 import ubb.project.iss.service.ServiceInterface;
@@ -19,5 +17,14 @@ public class PaperController {
     @RequestMapping(value = "/papers", method = RequestMethod.GET)
     List<Paper> getPapers() {
         return paperService.getAll();
+    }
+
+    @RequestMapping(value = "/papers", method = RequestMethod.POST)
+    Paper save(@RequestBody Paper paper) {
+        return paperService.save(paper);
+    }
+    @RequestMapping(value = "/papers/{id}", method = RequestMethod.GET)
+    Paper getById(@PathVariable Long id) {
+        return paperService.getById(id);
     }
 }

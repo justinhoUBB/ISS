@@ -1,9 +1,7 @@
 package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Paper;
 import ubb.project.iss.domain.SteeringCommittee;
 import ubb.project.iss.service.ServiceInterface;
@@ -17,5 +15,14 @@ public class SteeringController {
     @RequestMapping(value = "/steerings", method = RequestMethod.GET)
     List<SteeringCommittee> getPapers() {
         return steeringCommitteeService.getAll();
+    }
+
+    @RequestMapping(value = "/steerings", method = RequestMethod.POST)
+    SteeringCommittee save(@RequestBody SteeringCommittee steeringCommittee) {
+        return steeringCommitteeService.save(steeringCommittee);
+    }
+    @RequestMapping(value = "/steerings/{id}", method = RequestMethod.GET)
+    SteeringCommittee getById(@PathVariable Long id) {
+        return steeringCommitteeService.getById(id);
     }
 }

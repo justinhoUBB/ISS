@@ -19,31 +19,29 @@ public class ProjectApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(ProjectApplication.class, args);
-        final String URL = "http://localhost:8080/api/users";
+        final String URLpapers = "http://localhost:8080/api/papers";
+        final String URLconferences = "http://localhost:8080/api/conferences";
+        final String URLsteerings = "http://localhost:8080/api/steerings";
+        final String URLusers = "http://localhost:8080/api/users";
 
         RestTemplate restTemplate=new RestTemplate();
-
-        /*ResponseEntity<Paper[]> response =
+        //save element
+        Paper p=new Paper("aaa",2l);
+        restTemplate.postForObject(URLpapers,p,Paper.class);
+        //print all
+        ResponseEntity<Paper[]> response =
                 restTemplate.getForEntity(
-                        URL,
+                        URLpapers,
                         Paper[].class);
         Paper[] clients = response.getBody();
         System.out.println(clients.length);
 
         for (Paper client : Objects.requireNonNull(clients)) {
             System.out.println(client);
-        }*/
-        ResponseEntity<SteeringCommittee[]> response =
-                restTemplate.getForEntity(
-                        URL,
-                        SteeringCommittee[].class);
-        SteeringCommittee[] conferences = response.getBody();
-        System.out.println(conferences.length);
-
-        for (SteeringCommittee conference : Objects.requireNonNull(conferences)) {
-            System.out.println(conference);
         }
 
+        //find by id
+        Paper myClient = restTemplate.getForObject(URLpapers + "/{id}", Paper.class, (long) Integer.parseInt("1"));
+        System.out.println(myClient);
     }
-
 }

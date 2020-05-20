@@ -19,4 +19,16 @@ public class PaperServiceImpl implements ServiceInterface<Paper> {
         List<Paper> result = paperRepository.findAll();
         return result;
     }
+
+    @Override
+    public Paper save(Paper entity) {
+        return paperRepository.save(entity);
+    }
+
+
+    @Override
+    public Paper getById(Long id) {
+        Paper update = paperRepository.findById(id).orElse(new Paper("", 1L));
+        return update;
+    }
 }
