@@ -1,6 +1,7 @@
 package domain;
 
-import com.sun.istack.NotNull;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +14,10 @@ import java.io.Serializable;
 
 @MappedSuperclass
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public abstract class BaseEntity<ID extends Serializable> implements Serializable
+public class BaseEntity<ID extends Serializable> implements Serializable
 {
-    @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     protected ID id;
