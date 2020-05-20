@@ -18,6 +18,8 @@ public class Conference extends BaseEntity<Long>{
     private List<User> sc_members_id;
     @NotEmpty
     private List<String> topics;
+    @NotEmpty
+    private List<Integer> number_of_seats;
     @NonNull
     private LocalDate starting_date;
     @NonNull
