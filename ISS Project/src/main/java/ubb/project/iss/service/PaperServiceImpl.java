@@ -24,7 +24,6 @@ public class PaperServiceImpl implements ServiceInterface<Paper> {
         return paperRepository.save(entity);
     }
 
-
     @Override
     public Paper getById(Long id) {
         Paper update = paperRepository.findById(id).orElse(new Paper());
