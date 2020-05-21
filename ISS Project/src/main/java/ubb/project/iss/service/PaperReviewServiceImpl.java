@@ -1,10 +1,12 @@
 package ubb.project.iss.service;
 
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.PaperReview;
 
 import java.util.List;
 
-public class PaperReviewServiceImpl implements ServiceInterface<PaperReview> {
+@Service
+public class PaperReviewServiceImpl implements PaperReviewService {
     @Override
     public List<PaperReview> getAll() {
         return null;

@@ -1,10 +1,12 @@
 package ubb.project.iss.service;
 
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Section;
 
 import java.util.List;
 
-public class SectionServiceImpl implements ServiceInterface<Section> {
+@Service
+public class SectionServiceImpl implements SectionService {
     @Override
     public List<Section> getAll() {
         return null;

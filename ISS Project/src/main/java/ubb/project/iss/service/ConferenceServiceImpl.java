@@ -9,7 +9,7 @@ import ubb.project.iss.repository.ConferenceRepository;
 
 import java.util.List;
 @Service
-public class ConferenceServiceImpl implements ServiceInterface<Conference> {
+public class ConferenceServiceImpl implements ConferenceService {
     @Autowired
     private ConferenceRepository conferenceRepository;
     @Override

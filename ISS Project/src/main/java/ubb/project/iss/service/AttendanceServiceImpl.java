@@ -1,10 +1,12 @@
 package ubb.project.iss.service;
 
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Attendance;
 
 import java.util.List;
 
-public class AttendanceServiceImpl implements ServiceInterface<Attendance> {
+@Service
+public class AttendanceServiceImpl implements AttendanceService {
     @Override
     public List<Attendance> getAll() {
         return null;

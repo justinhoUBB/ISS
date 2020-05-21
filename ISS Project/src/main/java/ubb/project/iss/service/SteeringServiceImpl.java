@@ -9,7 +9,7 @@ import ubb.project.iss.repository.SteeringCommitteeRepository;
 
 import java.util.List;
 @Service
-public class SteeringServiceImpl implements ServiceInterface<SteeringCommittee> {
+public class SteeringServiceImpl implements SteeringService {
     @Autowired
     private SteeringCommitteeRepository steeringCommitteeRepository;
     @Override
