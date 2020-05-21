@@ -7,7 +7,6 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Table(name="userTable")
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,8 +14,11 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class User  extends BaseEntity<Long>{
+public class User  extends BaseEntity<Long> {
     private String first_name;
     private String last_name;
+    private String password;
     private String email;
+    private String affiliation;
+    private boolean is_committee_member; // 0 - chair, 1 - co-chair, 2 - regular user
 }

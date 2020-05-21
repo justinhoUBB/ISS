@@ -15,16 +15,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class Conference extends BaseEntity<Long>{
-
-    /*private List<User> sc_members_id;
-
-    private List<String> topics;
-
-    private List<Integer> number_of_seats;*/
-
+public class Conference extends BaseEntity<Long>
+{
+    private String description; // chestia cu call for papers
+    private String topics; // astea o sa fie delimitate prin spatiu
     private LocalDate starting_date;
-
     private LocalDate paper_deadline;
+    private int number_of_rooms;
+    private int number_of_seats_per_room;
 }
 

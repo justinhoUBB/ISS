@@ -26,7 +26,7 @@ public class ProjectApplication {
 
         RestTemplate restTemplate=new RestTemplate();
         //save element
-        Paper p=new Paper("aaa",2l);
+        Paper p=new Paper();
         restTemplate.postForObject(URLpapers,p,Paper.class);
         //print all
         ResponseEntity<Paper[]> response =

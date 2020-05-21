@@ -13,7 +13,6 @@ public class PaperServiceImpl implements ServiceInterface<Paper> {
     @Autowired
     private PaperRepository paperRepository;
 
-
     @Override
     public List<Paper> getAll() {
         List<Paper> result = paperRepository.findAll();
@@ -28,7 +27,7 @@ public class PaperServiceImpl implements ServiceInterface<Paper> {
 
     @Override
     public Paper getById(Long id) {
-        Paper update = paperRepository.findById(id).orElse(new Paper("", 1L));
+        Paper update = paperRepository.findById(id).orElse(new Paper());
         return update;
     }
 }
