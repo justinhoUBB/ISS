@@ -1,10 +1,12 @@
 package ubb.project.iss.service;
 
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Abstract;
 
 import java.util.List;
 
-public class AbstractServiceImpl implements ServiceInterface<Abstract> {
+@Service
+public class AbstractServiceImpl implements AbstractService {
     @Override
     public List<Abstract> getAll() {
         return null;

@@ -3,16 +3,14 @@ package ubb.project.iss.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.Paper;
-import ubb.project.iss.domain.SteeringCommittee;
-import ubb.project.iss.service.ServiceInterface;
+import ubb.project.iss.service.ConferenceService;
 
 import java.util.List;
 
 @RestController
 public class ConferenceController {
     @Autowired
-    private ServiceInterface<Conference> conferenceService;
+    private ConferenceService conferenceService;
 
     @RequestMapping(value = "/conferences", method = RequestMethod.GET)
     List<Conference> getConferences() {

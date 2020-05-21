@@ -1,4 +1,7 @@
 package ubb.project.iss.service;
 
-public class RepartitionServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class RepartitionServiceImpl implements RepartitionService {
 }

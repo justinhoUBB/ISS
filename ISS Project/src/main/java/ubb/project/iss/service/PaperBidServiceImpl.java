@@ -1,10 +1,12 @@
 package ubb.project.iss.service;
 
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.PaperBid;
 
 import java.util.List;
 
-public class PaperBidServiceImpl implements ServiceInterface<PaperBid> {
+@Service
+public class PaperBidServiceImpl implements PaperBidService {
     @Override
     public List<PaperBid> getAll() {
         return null;

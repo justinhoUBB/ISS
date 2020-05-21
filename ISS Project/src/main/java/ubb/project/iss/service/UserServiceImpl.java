@@ -11,7 +11,7 @@ import ubb.project.iss.repository.UserRepository;
 
 import java.util.List;
 @Service
-public class UserServiceImpl implements ServiceInterface<User> {
+public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Override

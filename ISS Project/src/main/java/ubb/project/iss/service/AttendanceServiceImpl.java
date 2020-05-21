@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AttendanceServiceImpl implements ServiceInterface<Attendance> {
+public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     AttendanceRepository attendanceRepository;
     @Autowired
@@ -30,15 +30,17 @@ public class AttendanceServiceImpl implements ServiceInterface<Attendance> {
         return attendanceRepository.save(userSignup);
     }
 
+    @Override
     public void removeAttendance(Attendance attendance) {
         attendanceRepository.delete(attendance);
     }
-    
+
     @Override
     public Attendance getById(Long id) {
         return attendanceRepository.findById(id).get();
     }
 
+    @Override
     public ArrayList<User> getAllUsersAttendingConference(long conference_id) {
         return (ArrayList<User>) attendanceRepository.findAll().stream().
                 filter(attendance -> attendance.getConference_id() == conference_id).
@@ -46,6 +48,7 @@ public class AttendanceServiceImpl implements ServiceInterface<Attendance> {
                 collect(Collectors.toList());
     }
 
+    @Override
     public ArrayList<Conference> getAllConferencesAttendedByUser(long user_id) {
         return (ArrayList<Conference>) attendanceRepository.findAll().stream().
                 filter(attendance -> attendance.getUser_id() == user_id).

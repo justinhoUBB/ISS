@@ -9,7 +9,7 @@ import ubb.project.iss.repository.PaperRepository;
 
 import java.util.List;
 @Service
-public class PaperServiceImpl implements ServiceInterface<Paper> {
+public class PaperServiceImpl implements PaperService {
     @Autowired
     private PaperRepository paperRepository;
 
