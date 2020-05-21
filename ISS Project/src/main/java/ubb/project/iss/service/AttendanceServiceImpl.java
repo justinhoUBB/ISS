@@ -1,6 +1,7 @@
 package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Attendance;
 import ubb.project.iss.domain.Conference;
 import ubb.project.iss.domain.User;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class AttendanceServiceImpl implements AttendanceService {
     @Autowired
     AttendanceRepository attendanceRepository;
