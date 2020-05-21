@@ -12,4 +12,5 @@ public interface PaperSubmissionService {
     void removeSubmission(Long submission_id);
     ArrayList<PaperSubmission> findAll();
     ArrayList<PaperSubmission> findByUserID(Long user_id);
+    ArrayList<PaperSubmission> findByConferenceID(Long conference_id);
 }

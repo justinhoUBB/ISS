@@ -11,8 +11,7 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class PaperSubmission extends BaseEntity<Long> {
-    private long user_id;
-    private long paper_id;
-    private long conference_id;
+public class Supervisor extends BaseEntity<Long> {
+    long user_id;
+    long conference_id;
 }

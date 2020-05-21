@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -15,5 +16,4 @@ import java.time.LocalDate;
 public class Section extends BaseEntity<Long> {
     private long supervisor_id;
     private long conference_id;
-    private LocalDate start_time;
 }

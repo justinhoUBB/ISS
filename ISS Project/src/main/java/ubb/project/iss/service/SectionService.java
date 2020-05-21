@@ -8,4 +8,5 @@ public interface SectionService {
     List<Section> getAll();
     Section save(Section entity);
     Section getById(Long id);
+    List<Section> getAllByConferenceID(Long id);
 }
