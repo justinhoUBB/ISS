@@ -33,6 +33,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile group: 'javax.mail', name: 'mail', version: '1.4'
 }
 
 test {

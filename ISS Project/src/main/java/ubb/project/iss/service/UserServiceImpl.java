@@ -1,12 +1,8 @@
 package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.Paper;
-import ubb.project.iss.domain.User;
-import ubb.project.iss.repository.PaperRepository;
+import ubb.project.iss.domain.UserTable;
 import ubb.project.iss.repository.UserRepository;
 
 import java.util.List;
@@ -15,19 +11,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Override
-    public List<User> getAll() {
-        List<User> result = userRepository.findAll();
+    public List<UserTable> getAll() {
+        List<UserTable> result = userRepository.findAll();
         return result;
     }
 
     @Override
-    public User save(User entity) {
+    public UserTable save(UserTable entity) {
         return userRepository.save(entity);
     }
 
     @Override
-    public User getById(Long id) {
-        User update = userRepository.findById(id).orElse(new User());
+    public UserTable getById(Long id) {
+        UserTable update = userRepository.findById(id).get();
         return update;
     }
 }

@@ -27,7 +27,7 @@ public class PaperServiceImpl implements PaperService {
 
     @Override
     public Paper getById(Long id) {
-        Paper update = paperRepository.findById(id).orElse(new Paper());
+        Paper update = paperRepository.findById(id).get();
         return update;
     }
 }

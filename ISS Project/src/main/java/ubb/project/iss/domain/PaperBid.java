@@ -3,6 +3,7 @@ package ubb.project.iss.domain;
 import lombok.*;
 
 import javax.persistence.Entity;
+import java.time.LocalDate;
 
 // inainte de review, commitee members pot sa aleaga daca vor sa faca review pt un paper sau nu
 
@@ -18,4 +19,5 @@ public class PaperBid extends BaseEntity<Long> {
     private long paper_id;
     private String justification;
     private int bid_value; // 1 daca e de acord sa faca review, 0 daca nu-i pasa, si -1 daca nu vrea
+    private LocalDate bid_date;
 }

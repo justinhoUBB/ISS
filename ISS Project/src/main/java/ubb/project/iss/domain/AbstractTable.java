@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 
 // cred ca ne trebuie clasa separata si pentru asta
 
@@ -12,13 +13,15 @@ import javax.persistence.Lob;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Table(name = "abstract_table")
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class Abstract extends BaseEntity<Long>{
-    private String title;
+public class AbstractTable extends BaseEntity<Long>{
+    private String abstractTitle;
+    @Column()
     private Long publisher_id;
     @Lob
-    @Column(columnDefinition="BLOB")
-    private byte[] content;
+    @Column(name = "abstract_content")
+    private byte[] abstract_content;
 }

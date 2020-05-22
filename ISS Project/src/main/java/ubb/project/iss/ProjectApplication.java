@@ -4,12 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import ubb.project.iss.domain.Conference;
 import ubb.project.iss.domain.Paper;
-import ubb.project.iss.domain.SteeringCommittee;
-import ubb.project.iss.domain.User;
 
-import java.util.List;
 import java.util.Objects;
 
 @SpringBootApplication
