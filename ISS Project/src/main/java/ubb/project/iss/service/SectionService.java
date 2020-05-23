@@ -9,4 +9,6 @@ public interface SectionService {
     Section save(Section entity);
     Section getById(Long id);
     List<Section> getAllByConferenceID(Long id);
+    void createRepartitions(Long conference_id);
+    void createSections(Long conference_id);
 }

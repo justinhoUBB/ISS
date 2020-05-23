@@ -20,4 +20,9 @@ public class SectionController {
     {
         return sectionService.getAllByConferenceID(id);
     }
+    @RequestMapping(value = "/sections/{id}", method = RequestMethod.PUT)
+    void createSections(@PathVariable Long id)
+    {
+        sectionService.createSections(id);
+    }
 }
