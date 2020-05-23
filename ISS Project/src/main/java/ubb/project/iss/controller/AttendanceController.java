@@ -14,25 +14,25 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
-    @RequestMapping(value = "/attendances", method = RequestMethod.GET)
+    @RequestMapping(value = "/attendences", method = RequestMethod.GET)
     List<Attendance> getConferences()
     {
         return attendanceService.getAll();
     }
 
-    @RequestMapping(value = "/attendances", method = RequestMethod.POST)
+    @RequestMapping(value = "/attendences", method = RequestMethod.POST)
     Attendance save(@RequestBody Attendance attendance)
     {
         return attendanceService.save(attendance);
     }
 
-    @RequestMapping(value = "/attendances/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/attendencesx/{id}", method = RequestMethod.GET)
     Attendance getById(@PathVariable Long id)
     {
         return attendanceService.getById(id);
     }
 
-    @RequestMapping(value = "attendances/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "attendences/{id}", method = RequestMethod.DELETE)
     void cancelSignUp(@PathVariable Long id)
     {
         Attendance attendance = attendanceService.getById(id);

@@ -17,8 +17,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    UserTable save(@RequestBody UserTable userAccount) {
-        return userService.save(userAccount);
+    UserTable save(@RequestBody UserTable user) {
+        return userService.save(user);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
