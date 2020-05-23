@@ -13,7 +13,6 @@ import javax.persistence.Lob;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "abstract_table")
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
