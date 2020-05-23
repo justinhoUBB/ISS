@@ -3,8 +3,6 @@ package ubb.project.iss.domain;
 import lombok.*;
 
 import javax.persistence.Entity;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -13,7 +11,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class Section extends BaseEntity<Long> {
-    private long supervisor_id;
-    private long conference_id;
+public class Supervisor extends BaseEntity<Long> {
+    long user_id;
+    long conference_id;
 }

@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserTable getById(Long id) {
-        UserTable update = userRepository.findById(id).get();
+        UserTable update = userRepository.findById(id).orElse(new UserTable());
         return update;
     }
 }

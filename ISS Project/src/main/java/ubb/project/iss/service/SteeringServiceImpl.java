@@ -23,7 +23,7 @@ public class SteeringServiceImpl implements SteeringService {
 
     @Override
     public SteeringCommittee getById(Long id) {
-        SteeringCommittee update = steeringCommitteeRepository.findById(id).get();
+        SteeringCommittee update = steeringCommitteeRepository.findById(id).orElse(new SteeringCommittee());
         return update;
     }
 }
