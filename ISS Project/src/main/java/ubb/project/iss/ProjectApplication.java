@@ -5,11 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.Paper;
-import ubb.project.iss.domain.SteeringCommittee;
-import ubb.project.iss.domain.User;
 
-import java.util.List;
 import java.util.Objects;
 
 @SpringBootApplication
@@ -25,23 +21,16 @@ public class ProjectApplication {
         final String URLusers = "http://localhost:8080/api/users";
 
         RestTemplate restTemplate=new RestTemplate();
-        //save element
-        Paper p=new Paper();
-        restTemplate.postForObject(URLpapers,p,Paper.class);
         //print all
-        ResponseEntity<Paper[]> response =
+        ResponseEntity<Conference[]> response =
                 restTemplate.getForEntity(
-                        URLpapers,
-                        Paper[].class);
-        Paper[] clients = response.getBody();
-        System.out.println(clients.length);
+                        URLconferences,
+                        Conference[].class);
+        Conference[] conferences = response.getBody();
+        System.out.println(conferences.length);
 
-        for (Paper client : Objects.requireNonNull(clients)) {
-            System.out.println(client);
+        for (Conference conference : Objects.requireNonNull(conferences)) {
+            System.out.println(conference);
         }
-
-        //find by id
-        Paper myClient = restTemplate.getForObject(URLpapers + "/{id}", Paper.class, (long) Integer.parseInt("1"));
-        System.out.println(myClient);
     }
 }
