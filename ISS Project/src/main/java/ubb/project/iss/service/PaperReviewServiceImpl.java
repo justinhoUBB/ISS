@@ -1,12 +1,11 @@
 package ubb.project.iss.service;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Paper;
 import ubb.project.iss.domain.PaperBid;
 import ubb.project.iss.domain.PaperReview;
-import ubb.project.iss.domain.UserTable;
+import ubb.project.iss.domain.UserAccount;
 import ubb.project.iss.repository.PaperBidRepository;
 import ubb.project.iss.repository.PaperRepository;
 import ubb.project.iss.repository.PaperReviewRepository;
@@ -17,7 +16,6 @@ import java.util.Properties;
 import java.util.Random;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
 
 @Service
 public class PaperReviewServiceImpl implements PaperReviewService {
@@ -144,7 +142,7 @@ public class PaperReviewServiceImpl implements PaperReviewService {
                 this.save(paperReview2);
             }
             else {
-                UserTable user = userService.getById(paper.getPublisher_id());
+                UserAccount user = userService.getById(paper.getPublisher_id());
                 //denied
                 this.sendDenialEmail(user.getEmail());
             }

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Attendance;
 import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.UserTable;
+import ubb.project.iss.domain.UserAccount;
 import ubb.project.iss.service.AttendanceService;
 
 import java.util.List;
@@ -14,20 +14,6 @@ public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
 
-<<<<<<< HEAD
-    @RequestMapping(value = "/attendences", method = RequestMethod.GET)
-    List<Attendance> getConferences() {
-        return attendanceService.getAll();
-    }
-
-    @RequestMapping(value = "/attendences", method = RequestMethod.POST)
-    Attendance save(@RequestBody Attendance attendance) {
-        return attendanceService.save(attendance);
-    }
-
-    @RequestMapping(value = "/attendencesx/{id}", method = RequestMethod.GET)
-    Attendance getById(@PathVariable Long id) {
-=======
     @RequestMapping(value = "/attendances", method = RequestMethod.GET)
     List<Attendance> getConferences()
     {
@@ -43,7 +29,6 @@ public class AttendanceController {
     @RequestMapping(value = "/attendances/{id}", method = RequestMethod.GET)
     Attendance getById(@PathVariable Long id)
     {
->>>>>>> signup-service
         return attendanceService.getById(id);
     }
 
@@ -55,7 +40,7 @@ public class AttendanceController {
     }
 
     @RequestMapping(value = "/users_attending/{id}", method = RequestMethod.GET)
-    List<UserTable> getUsersAttendingConference(@PathVariable Long id)
+    List<UserAccount> getUsersAttendingConference(@PathVariable Long id)
     {
         return attendanceService.getAllUsersAttendingConference(id);
     }

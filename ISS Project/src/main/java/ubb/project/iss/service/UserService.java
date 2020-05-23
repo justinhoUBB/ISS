@@ -1,10 +1,10 @@
 package ubb.project.iss.service;
 
-import ubb.project.iss.domain.UserTable;
+import ubb.project.iss.domain.UserAccount;
 
 import java.util.List;
 public interface UserService {
-    List<UserTable> getAll();
-    UserTable save(UserTable entity);
-    UserTable getById(Long id);
+    List<UserAccount> getAll();
+    UserAccount save(UserAccount entity);
+    UserAccount getById(Long id);
 }
