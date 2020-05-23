@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.*;
 import ubb.project.iss.repository.ConferenceRepository;
-import ubb.project.iss.repository.PaperSubmissionRepository;
 import ubb.project.iss.repository.SectionRepository;
 
 import java.util.ArrayList;
@@ -66,7 +65,7 @@ public class SectionServiceImpl implements SectionService {
         ArrayList<PaperSubmission> submissions = paperSubmissionService.findByConferenceID(conference_id);
         int numberOfSubmissions = submissions.size();
         ArrayList<Supervisor> supervisors = (ArrayList<Supervisor>) supervisorService.getByConferenceID(conference_id);
-        ArrayList<User> attendances = attendanceService.getAllUsersAttendingConference(conference_id);
+        ArrayList<UserAccount> attendances = attendanceService.getAllUsersAttendingConference(conference_id);
         int sectionIndex = 0;
         for(int i = 0; i < numberOfSubmissions; i++)
         {
@@ -83,9 +82,9 @@ public class SectionServiceImpl implements SectionService {
         }
         // users will be evenly distributed
         sectionIndex = 0;
-        for (User user : attendances)
+        for (UserAccount userAccount : attendances)
         {
-            repartitions.add(new Repartition(user.getId(), sectionIndex));
+            repartitions.add(new Repartition(userAccount.getId(), sectionIndex));
             sectionIndex++;
             if(sectionIndex == numberOfRooms)
             {

@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import ubb.project.iss.domain.Repartition;
-import ubb.project.iss.domain.User;
 import ubb.project.iss.service.RepartitionService;
 
 import java.util.List;

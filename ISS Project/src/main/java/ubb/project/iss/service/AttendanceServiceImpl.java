@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ubb.project.iss.domain.Attendance;
 import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.User;
+import ubb.project.iss.domain.UserAccount;
 import ubb.project.iss.repository.AttendanceRepository;
 import ubb.project.iss.repository.ConferenceRepository;
 import ubb.project.iss.repository.UserRepository;
@@ -43,8 +43,8 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public ArrayList<User> getAllUsersAttendingConference(long conference_id) {
-        return (ArrayList<User>) attendanceRepository.findAll().stream().
+    public ArrayList<UserAccount> getAllUsersAttendingConference(long conference_id) {
+        return (ArrayList<UserAccount>) attendanceRepository.findAll().stream().
                 filter(attendance -> attendance.getConference_id() == conference_id).
                 map(attendance -> userRepository.findById(attendance.getUser_id()).get()).
                 collect(Collectors.toList());

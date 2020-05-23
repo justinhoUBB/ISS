@@ -19,6 +19,5 @@ public class Abstract extends BaseEntity<Long>{
     private String title;
     private Long publisher_id;
     @Lob
-    @Column(columnDefinition="BLOB")
     private byte[] content;
 }
