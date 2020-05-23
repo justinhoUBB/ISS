@@ -1,9 +1,9 @@
-package iss.service;
+package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import iss.domain.UserAccount;
-import iss.repository.UserRepository;
+import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.repository.UserRepository;
 
 import java.util.List;
 @Service

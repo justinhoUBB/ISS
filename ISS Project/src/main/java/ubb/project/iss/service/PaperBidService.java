@@ -1,6 +1,6 @@
-package iss.service;
+package ubb.project.iss.service;
 
-import iss.domain.PaperBid;
+import ubb.project.iss.domain.PaperBid;
 
 import java.util.List;
 

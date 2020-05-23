@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.SteeringCommittee;
+import ubb.project.iss.domain.SteeringCommittee;
 
 public interface SteeringCommitteeRepository extends Repository<SteeringCommittee,Long> {
 }

@@ -1,6 +1,6 @@
-package iss.service;
+package ubb.project.iss.service;
 
-import iss.domain.PaperReview;
+import ubb.project.iss.domain.PaperReview;
 
 import java.util.List;
 

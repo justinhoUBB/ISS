@@ -1,12 +1,13 @@
-package iss.controller;
+package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import iss.domain.UserAccount;
-import iss.service.UserService;
+import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.service.UserService;
 
 import java.util.List;
 @RestController
+@CrossOrigin
 public class UserController {
     @Autowired
     private UserService userService;
@@ -25,4 +26,6 @@ public class UserController {
     UserAccount getById(@PathVariable Long id) {
         return userService.getById(id);
     }
+
+
 }

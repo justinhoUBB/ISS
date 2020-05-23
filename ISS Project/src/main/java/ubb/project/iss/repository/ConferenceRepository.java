@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Conference;
+import ubb.project.iss.domain.Conference;
 
 public interface ConferenceRepository extends Repository<Conference,Long> {
 }

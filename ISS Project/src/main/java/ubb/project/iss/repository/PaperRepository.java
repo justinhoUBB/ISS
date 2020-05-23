@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Paper;
+import ubb.project.iss.domain.Paper;
 
 public interface PaperRepository extends Repository<Paper, Long>{
 }

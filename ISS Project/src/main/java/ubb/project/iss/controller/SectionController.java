@@ -1,12 +1,12 @@
-package iss.controller;
+package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import iss.domain.Section;
-import iss.service.SectionService;
+import ubb.project.iss.domain.Section;
+import ubb.project.iss.service.SectionService;
 
 import java.util.List;
 

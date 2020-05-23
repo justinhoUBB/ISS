@@ -1,9 +1,9 @@
-package iss.controller;
+package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import iss.domain.PaperBid;
-import iss.service.PaperBidService;
+import ubb.project.iss.domain.PaperBid;
+import ubb.project.iss.service.PaperBidService;
 
 import java.util.List;
 

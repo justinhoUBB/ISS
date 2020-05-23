@@ -1,9 +1,9 @@
-package iss.service;
+package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import iss.domain.Conference;
-import iss.repository.ConferenceRepository;
+import ubb.project.iss.domain.Conference;
+import ubb.project.iss.repository.ConferenceRepository;
 
 import java.util.List;
 @Service

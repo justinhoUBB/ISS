@@ -1,14 +1,14 @@
-package iss.service;
+package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import iss.domain.Paper;
-import iss.domain.PaperBid;
-import iss.domain.PaperReview;
-import iss.domain.UserAccount;
-import iss.repository.PaperBidRepository;
-import iss.repository.PaperRepository;
-import iss.repository.PaperReviewRepository;
+import ubb.project.iss.domain.Paper;
+import ubb.project.iss.domain.PaperBid;
+import ubb.project.iss.domain.PaperReview;
+import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.repository.PaperBidRepository;
+import ubb.project. iss.repository.PaperRepository;
+import ubb.project.iss.repository.PaperReviewRepository;
 
 import java.util.ArrayList;
 import java.util.List;

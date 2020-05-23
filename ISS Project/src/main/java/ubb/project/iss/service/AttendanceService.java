@@ -1,8 +1,8 @@
-package iss.service;
+package ubb.project.iss.service;
 
-import iss.domain.Attendance;
-import iss.domain.Conference;
-import iss.domain.UserAccount;
+import ubb.project.iss.domain.Attendance;
+import ubb.project.iss.domain.Conference;
+import ubb.project.iss.domain.UserAccount;
 
 import java.util.ArrayList;
 import java.util.List;

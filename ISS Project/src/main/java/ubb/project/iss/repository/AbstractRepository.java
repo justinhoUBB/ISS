@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Abstract;
+import ubb.project.iss.domain.Abstract;
 
 public interface AbstractRepository extends Repository<Abstract,Long> {
 }

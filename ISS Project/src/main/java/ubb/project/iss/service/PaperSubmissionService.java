@@ -1,6 +1,6 @@
-package iss.service;
+package ubb.project.iss.service;
 
-import iss.domain.PaperSubmission;
+import ubb.project.iss.domain.PaperSubmission;
 
 import java.util.ArrayList;
 

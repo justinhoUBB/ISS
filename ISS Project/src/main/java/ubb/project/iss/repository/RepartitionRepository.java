@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Repartition;
+import ubb.project.iss.domain.Repartition;
 
 public interface RepartitionRepository extends Repository<Repartition, Long> {
 }

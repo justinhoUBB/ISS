@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Supervisor;
+import ubb.project.iss.domain.Supervisor;
 
 public interface SupervisorRepository extends Repository<Supervisor,Long> {
 }

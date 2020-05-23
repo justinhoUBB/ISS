@@ -1,6 +1,6 @@
-package iss.service;
+package ubb.project.iss.service;
 
-import iss.domain.Conference;
+import ubb.project.iss.domain.Conference;
 
 import java.util.List;
 

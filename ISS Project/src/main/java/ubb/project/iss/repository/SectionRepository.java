@@ -1,6 +1,6 @@
-package iss.repository;
+package ubb.project.iss.repository;
 
-import iss.domain.Section;
+import ubb.project.iss.domain.Section;
 
 public interface SectionRepository extends Repository<Section,Long> {
 }

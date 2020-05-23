@@ -1,5 +1,5 @@
 
-package iss.domain;
+package ubb.project.iss.domain;
 
 
 import lombok.*;

@@ -1,10 +1,10 @@
-package iss.service;
+package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import iss.domain.*;
-import iss.repository.ConferenceRepository;
-import iss.repository.SectionRepository;
+import ubb.project.iss.domain.*;
+import ubb.project.iss.repository.ConferenceRepository;
+import ubb.project.iss.repository.SectionRepository;
 
 import java.util.ArrayList;
 import java.util.List;

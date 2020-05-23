@@ -1,7 +1,7 @@
-package iss.domain;
-
+package ubb.project.iss.domain;
 
 import lombok.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 
 import javax.persistence.Entity;
