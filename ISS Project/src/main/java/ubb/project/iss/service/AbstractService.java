@@ -1,11 +1,11 @@
 package ubb.project.iss.service;
 
-import ubb.project.iss.domain.Abstract;
+import ubb.project.iss.domain.AbstractTable;
 
 import java.util.List;
 
 public interface AbstractService {
-    List<Abstract> getAll();
-    Abstract save(Abstract entity);
-    Abstract getById(Long id);
+    List<AbstractTable> getAll();
+    AbstractTable save(AbstractTable entity);
+    AbstractTable getById(Long id);
 }

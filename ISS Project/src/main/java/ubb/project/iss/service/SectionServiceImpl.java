@@ -65,7 +65,7 @@ public class SectionServiceImpl implements SectionService {
         ArrayList<PaperSubmission> submissions = paperSubmissionService.findByConferenceID(conference_id);
         int numberOfSubmissions = submissions.size();
         ArrayList<Supervisor> supervisors = (ArrayList<Supervisor>) supervisorService.getByConferenceID(conference_id);
-        ArrayList<UserAccount> attendances = attendanceService.getAllUsersAttendingConference(conference_id);
+        ArrayList<UserTable> attendances = attendanceService.getAllUsersAttendingConference(conference_id);
         int sectionIndex = 0;
         for(int i = 0; i < numberOfSubmissions; i++)
         {
@@ -82,7 +82,7 @@ public class SectionServiceImpl implements SectionService {
         }
         // users will be evenly distributed
         sectionIndex = 0;
-        for (UserAccount userAccount : attendances)
+        for (UserTable userAccount : attendances)
         {
             repartitions.add(new Repartition(userAccount.getId(), sectionIndex));
             sectionIndex++;

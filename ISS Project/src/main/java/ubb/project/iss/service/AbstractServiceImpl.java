@@ -1,24 +1,24 @@
 package ubb.project.iss.service;
 
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Abstract;
+import ubb.project.iss.domain.AbstractTable;
 
 import java.util.List;
 
 @Service
 public class AbstractServiceImpl implements AbstractService {
     @Override
-    public List<Abstract> getAll() {
+    public List<AbstractTable> getAll() {
         return null;
     }
 
     @Override
-    public Abstract save(Abstract entity) {
+    public AbstractTable save(AbstractTable entity) {
         return null;
     }
 
     @Override
-    public Abstract getById(Long id) {
+    public AbstractTable getById(Long id) {
         return null;
     }
 }

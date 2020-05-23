@@ -2,7 +2,7 @@ package ubb.project.iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.domain.UserTable;
 import ubb.project.iss.service.UserService;
 
 import java.util.List;
@@ -12,17 +12,17 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    List<UserAccount> getUsers() {
+    List<UserTable> getUsers() {
         return userService.getAll();
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    UserAccount save(@RequestBody UserAccount userAccount) {
+    UserTable save(@RequestBody UserTable userAccount) {
         return userService.save(userAccount);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    UserAccount getById(@PathVariable Long id) {
+    UserTable getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 }

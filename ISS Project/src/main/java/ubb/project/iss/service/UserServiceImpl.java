@@ -2,7 +2,7 @@ package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.domain.UserTable;
 import ubb.project.iss.repository.UserRepository;
 
 import java.util.List;
@@ -11,19 +11,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
     @Override
-    public List<UserAccount> getAll() {
-        List<UserAccount> result = userRepository.findAll();
+    public List<UserTable> getAll() {
+        List<UserTable> result = userRepository.findAll();
         return result;
     }
 
     @Override
-    public UserAccount save(UserAccount entity) {
+    public UserTable save(UserTable entity) {
         return userRepository.save(entity);
     }
 
     @Override
-    public UserAccount getById(Long id) {
-        UserAccount update = userRepository.findById(id).orElse(new UserAccount());
+    public UserTable getById(Long id) {
+        UserTable update = userRepository.findById(id).orElse(new UserTable());
         return update;
     }
 }

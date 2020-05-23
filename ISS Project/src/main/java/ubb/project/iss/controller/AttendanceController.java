@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Attendance;
 import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.UserAccount;
+import ubb.project.iss.domain.UserTable;
 import ubb.project.iss.service.AttendanceService;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class AttendanceController {
     }
 
     @RequestMapping(value = "/users_attending/{id}", method = RequestMethod.GET)
-    List<UserAccount> getUsersAttendingConference(@PathVariable Long id)
+    List<UserTable> getUsersAttendingConference(@PathVariable Long id)
     {
         return attendanceService.getAllUsersAttendingConference(id);
     }
