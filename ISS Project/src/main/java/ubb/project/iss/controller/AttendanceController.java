@@ -31,23 +31,4 @@ public class AttendanceController {
     {
         return attendanceService.getById(id);
     }
-
-    @RequestMapping(value = "attendences/{id}", method = RequestMethod.DELETE)
-    void cancelSignUp(@PathVariable Long id)
-    {
-        Attendance attendance = attendanceService.getById(id);
-        attendanceService.removeAttendance(attendance);
-    }
-
-    @RequestMapping(value = "/users_attending/{id}", method = RequestMethod.GET)
-    List<UserTable> getUsersAttendingConference(@PathVariable Long id)
-    {
-        return attendanceService.getAllUsersAttendingConference(id);
-    }
-
-    @RequestMapping(value = "/conferences_attended/{id}", method = RequestMethod.GET)
-    List<Conference> getConferencesAttendedByUser(@PathVariable Long id)
-    {
-        return attendanceService.getAllConferencesAttendedByUser(id);
-    }
 }
