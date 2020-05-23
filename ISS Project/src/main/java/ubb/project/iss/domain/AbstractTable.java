@@ -1,11 +1,11 @@
 package ubb.project.iss.domain;
 
 import lombok.*;
+import org.hibernate.annotations.Table;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import javax.persistence.Table;
 
 // cred ca ne trebuie clasa separata si pentru asta
 
@@ -18,8 +18,7 @@ import javax.persistence.Table;
 @ToString(callSuper = true)
 @Builder
 public class AbstractTable extends BaseEntity<Long>{
-    private String abstractTitle;
-    @Column()
+    private String title;
     private Long publisher_id;
     @Lob
     @Column(name = "abstract_content")
