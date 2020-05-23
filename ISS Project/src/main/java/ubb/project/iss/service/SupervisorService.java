@@ -1,8 +1,6 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import net.bytebuddy.implementation.bind.annotation.Super;
-import ubb.project.iss.domain.Paper;
-import ubb.project.iss.domain.Supervisor;
+import iss.domain.Supervisor;
 
 import java.util.List;
 

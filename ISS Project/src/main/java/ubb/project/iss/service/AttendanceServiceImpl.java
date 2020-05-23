@@ -1,13 +1,13 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Attendance;
-import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.UserAccount;
-import ubb.project.iss.repository.AttendanceRepository;
-import ubb.project.iss.repository.ConferenceRepository;
-import ubb.project.iss.repository.UserRepository;
+import iss.domain.Attendance;
+import iss.domain.Conference;
+import iss.domain.UserAccount;
+import iss.repository.AttendanceRepository;
+import iss.repository.ConferenceRepository;
+import iss.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;

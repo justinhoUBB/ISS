@@ -1,9 +1,9 @@
-package ubb.project.iss.controller;
+package iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ubb.project.iss.domain.UserAccount;
-import ubb.project.iss.service.UserService;
+import iss.domain.UserAccount;
+import iss.service.UserService;
 
 import java.util.List;
 @RestController

@@ -1,17 +1,14 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.PaperBid;
-import ubb.project.iss.repository.ConferenceRepository;
-import ubb.project.iss.repository.PaperBidRepository;
-import ubb.project.iss.repository.PaperRepository;
-import ubb.project.iss.repository.SteeringCommitteeRepository;
+import iss.domain.Conference;
+import iss.domain.PaperBid;
+import iss.repository.PaperBidRepository;
+import iss.repository.PaperRepository;
+import iss.repository.SteeringCommitteeRepository;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

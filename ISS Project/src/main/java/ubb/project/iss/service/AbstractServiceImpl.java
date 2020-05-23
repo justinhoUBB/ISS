@@ -1,7 +1,7 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Abstract;
+import iss.domain.Abstract;
 
 import java.util.List;
 

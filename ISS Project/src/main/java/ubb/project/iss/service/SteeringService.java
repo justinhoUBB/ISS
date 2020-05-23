@@ -1,6 +1,6 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import ubb.project.iss.domain.SteeringCommittee;
+import iss.domain.SteeringCommittee;
 
 import java.util.List;
 public interface SteeringService {

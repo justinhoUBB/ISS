@@ -1,6 +1,6 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import ubb.project.iss.domain.CommitteeMembership;
+import iss.domain.CommitteeMembership;
 
 import java.util.List;
 

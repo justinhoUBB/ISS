@@ -1,10 +1,10 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ubb.project.iss.domain.PaperSubmission;
-import ubb.project.iss.repository.PaperSubmissionRepository;
+import iss.domain.PaperSubmission;
+import iss.repository.PaperSubmissionRepository;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;

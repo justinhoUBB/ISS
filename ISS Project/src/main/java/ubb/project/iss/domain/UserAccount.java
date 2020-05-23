@@ -1,11 +1,10 @@
-package ubb.project.iss.domain;
+package iss.domain;
 
 
 import lombok.*;
 
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
 @NoArgsConstructor

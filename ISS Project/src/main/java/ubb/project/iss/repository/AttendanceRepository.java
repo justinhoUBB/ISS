@@ -1,6 +1,6 @@
-package ubb.project.iss.repository;
+package iss.repository;
 
-import ubb.project.iss.domain.Attendance;
+import iss.domain.Attendance;
 
 public interface AttendanceRepository extends Repository<Attendance,Long> {
 }

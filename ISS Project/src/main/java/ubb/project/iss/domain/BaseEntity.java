@@ -1,4 +1,4 @@
-package ubb.project.iss.domain;
+package iss.domain;
 
 
 import lombok.AllArgsConstructor;

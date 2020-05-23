@@ -1,7 +1,7 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.CommitteeMembership;
+import iss.domain.CommitteeMembership;
 
 import java.util.List;
 

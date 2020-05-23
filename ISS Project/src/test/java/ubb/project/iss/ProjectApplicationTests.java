@@ -1,4 +1,4 @@
-package ubb.project.iss;
+package iss;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

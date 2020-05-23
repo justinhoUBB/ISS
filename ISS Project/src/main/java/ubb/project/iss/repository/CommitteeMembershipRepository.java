@@ -1,6 +1,6 @@
-package ubb.project.iss.repository;
+package iss.repository;
 
-import ubb.project.iss.domain.CommitteeMembership;
+import iss.domain.CommitteeMembership;
 
 public interface CommitteeMembershipRepository extends Repository<CommitteeMembership, Long> {
 }

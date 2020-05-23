@@ -1,12 +1,10 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ubb.project.iss.domain.Paper;
-import ubb.project.iss.repository.PaperRepository;
+import iss.domain.Paper;
+import iss.repository.PaperRepository;
 
 import java.util.List;
 @Service

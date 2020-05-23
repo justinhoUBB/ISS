@@ -1,11 +1,11 @@
-package ubb.project.iss.controller;
+package iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ubb.project.iss.domain.Attendance;
-import ubb.project.iss.domain.Conference;
-import ubb.project.iss.domain.UserAccount;
-import ubb.project.iss.service.AttendanceService;
+import iss.domain.Attendance;
+import iss.domain.Conference;
+import iss.domain.UserAccount;
+import iss.service.AttendanceService;
 
 import java.util.List;
 

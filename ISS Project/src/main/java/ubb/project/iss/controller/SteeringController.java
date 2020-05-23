@@ -1,9 +1,9 @@
-package ubb.project.iss.controller;
+package iss.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ubb.project.iss.domain.SteeringCommittee;
-import ubb.project.iss.service.SteeringService;
+import iss.domain.SteeringCommittee;
+import iss.service.SteeringService;
 
 import java.util.List;
 @RestController

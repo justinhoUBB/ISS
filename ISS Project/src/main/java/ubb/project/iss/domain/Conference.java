@@ -1,11 +1,9 @@
-package ubb.project.iss.domain;
+package iss.domain;
 
 import lombok.*;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Entity

@@ -1,10 +1,10 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.Repartition;
-import ubb.project.iss.domain.Section;
-import ubb.project.iss.repository.RepartitionRepository;
+import iss.domain.Repartition;
+import iss.domain.Section;
+import iss.repository.RepartitionRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

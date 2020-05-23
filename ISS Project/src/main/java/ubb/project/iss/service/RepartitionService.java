@@ -1,6 +1,6 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import ubb.project.iss.domain.Repartition;
+import iss.domain.Repartition;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package ubb.project.iss.service;
+package iss.service;
 
-import ubb.project.iss.domain.UserAccount;
+import iss.domain.UserAccount;
 
 import java.util.List;
 public interface UserService {

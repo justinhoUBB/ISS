@@ -1,9 +1,9 @@
-package ubb.project.iss.service;
+package iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ubb.project.iss.domain.SteeringCommittee;
-import ubb.project.iss.repository.SteeringCommitteeRepository;
+import iss.domain.SteeringCommittee;
+import iss.repository.SteeringCommitteeRepository;
 
 import java.util.List;
 @Service
