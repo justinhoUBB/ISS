@@ -18,7 +18,8 @@ export default class ReviewPapers extends Component{
             member_id: 0,
             isLoaded:false,
             isShow:false
-        }
+        };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.register  = paper.addReview.bind(this);
@@ -62,6 +63,9 @@ export default class ReviewPapers extends Component{
 
 
     render(){
+        const { data } = this.props.location;
+        this.state.paper_id=data[0];
+        this.state.member_id=data[1];
 
         const {items, isLoaded} = this.state;
         return (
@@ -76,25 +80,15 @@ export default class ReviewPapers extends Component{
                 <br/>
 
 
-                {!this.state.isShow && <button onClick = {this.createText}> Review Paper</button>}
+                {/*{!this.state.isShow && <button onClick = {this.createText}> Review Paper</button>}*/}
 
-                {this.state.isShow &&
+                {!this.state.isShow &&
                 <form onSubmit={this.handleSubmit}>
-                    Paper id: <br/>
-                    <input type ="long"
-                           name = "paper_id"
-                           placeholder="paper id"
-                           value={this.state.paper_id}
-                           onChange={this.handleChange}
-                           required/><br/><br/>
+                    Paper id= {this.state.paper_id}<br></br><br></br>
 
-                    Your Id: <br/>
-                    <input type ="long"
-                           name = "member_id"
-                           placeholder="member id"
-                           value={this.state.member_id}
-                           onChange={this.handleChange}
-                           required/><br/><br/>
+
+                    Your Id= {this.state.member_id}<br></br><br></br>
+
 
 
                     Remark:<br/>

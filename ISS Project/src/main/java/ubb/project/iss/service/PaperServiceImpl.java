@@ -3,6 +3,8 @@ package ubb.project.iss.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import ubb.project.iss.domain.Paper;
 import ubb.project.iss.repository.PaperRepository;
 
@@ -11,6 +13,7 @@ import java.util.List;
 public class PaperServiceImpl implements PaperService {
     @Autowired
     private PaperRepository paperRepository;
+
 
     @Override
     public List<Paper> getAll() {
@@ -21,7 +24,7 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public Paper save(Paper entity) {
         return paperRepository.save(entity);
-    }
+   }
 
     @Override
     @Transactional

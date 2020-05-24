@@ -1,14 +1,17 @@
 import React, {Component} from "react";
 import {Button} from "reactstrap";
 import { useHistory } from 'react-router';
+import {Link} from "react-router-dom";
 const auth = require('../api/auth');
 
 
 export default class Login extends  Component {
     constructor(props) {
+
         super(props);
 
         this.state = {
+
             email: "",
             password: "",
             submitted: false,
@@ -38,7 +41,9 @@ export default class Login extends  Component {
     handleChange(event){
         this.setState({
             [event.target.name]: event.target.value
+
         });
+
 
     }
     logout() {
@@ -80,10 +85,14 @@ export default class Login extends  Component {
                  }
 
 
-                 { this.state.submitted && <div className="conferenceList"> <h2> Welcome, {this.state.email} !</h2>
+                 { this.state.submitted &&  <div className="conferenceList"> <h2> Welcome, {this.state.email}!</h2>
                      <a href="http://localhost:3000/dashboard"> Dashboard </a><br/>
+                     <Link to={{  pathname: `/dashboard/${this.state.email}`}}>Dashboard</Link>
+
                      <Button className="buttonLogOut" > Log out </Button>
-                 </div>}
+                 </div>
+
+                 }
 
 
         </div>

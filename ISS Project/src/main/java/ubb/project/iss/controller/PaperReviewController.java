@@ -19,7 +19,7 @@ public class PaperReviewController {
     }
 
     @RequestMapping(value = "/paper_review", method = RequestMethod.POST)
-    PaperReview save(@RequestBody PaperReview paperReview, long conferenceID) {
+    PaperReview save(@RequestBody PaperReview paperReview) {
         return paperReviewService.save(paperReview);
     }
 

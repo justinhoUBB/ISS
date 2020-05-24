@@ -10,14 +10,14 @@ export default class Conference extends Component {
     constructor(props) {
         super(props);
         this.state= {
-            paper_title:"",
+            title:"",
             publisher_id:0,
             conference_id:0,
             list_of_authors:"",
             keywords:"",
-            paper_content:"",
+            content:"",
             isShow: false
-        }
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.register  = paper.addPaper.bind(this);
@@ -68,9 +68,9 @@ export default class Conference extends Component {
                 <form onSubmit={this.handleSubmit}>
                    Title: <br/>
                     <input type ="text"
-                           name = "paper_title"
+                           name = "title"
                            placeholder="title"
-                           value={this.state.paper_title}
+                           value={this.state.title}
                            onChange={this.handleChange}
                            required/><br/><br/>
 
@@ -110,9 +110,9 @@ export default class Conference extends Component {
 
                     Content:<br/>
                     <input type ="file"
-                           name = "paper_content"
+                           name = "content"
                            placeholder="content"
-                           value={this.state.paper_content}
+                           value={this.state.content}
                            onChange={this.handleChange}
                            required/><br/>
                            <br/>

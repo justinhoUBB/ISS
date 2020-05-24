@@ -7,14 +7,16 @@ import ReactDOM from 'react-dom'
 import { withRouter } from "react-router-dom";
 
 export default class CommitteeDashboard extends Component{
+    userId;
 
     constructor(props) {
         super(props);
         this.state={
             items:[],
             isLoaded:false,
-            isShow:false
-        }
+            isShow:false,
+            users:[]
+        };
         this.logout = this.logout.bind(this);
     }
 
@@ -27,11 +29,29 @@ export default class CommitteeDashboard extends Component{
                     items: json,
 
                 })
+            });
+        fetch('http://localhost:8080/api/users')
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    users: json,
+
+                })
             })
     }
 
     logout() {
         this.props.history.push('/logout');
+    }
+    reviewPaperWithId(id){
+
+        this.userId=this.state.users.filter(item=>item.email=localStorage.loggedInUser).map(item=>item.id);
+        this.props.history.push({
+            pathname: '/reviewpaper',
+            data: [id,this.userId]
+        })
+
     }
 
     render(){
@@ -53,15 +73,16 @@ export default class CommitteeDashboard extends Component{
                     {items.map(item=>(
                         <li key={item.id}>
 
-                            {item.paper_title}  Paper  <br/>
+
+                            {item.title}  Paper  <br/>
 
                             List of Authors: {item.list_of_authors}<br/>
                             Keywords: {item.keywords}<br/>
-                            Content: {item.paper_content}<br/>
+                            Content: {item.content}<br/>
 
                             <br/>
 
-                            <Button color="succes"> Bid</Button>
+                            <Button color="succes" onClick={()=>this.reviewPaperWithId(item.id)}> Bid</Button>
                             <br/><br/><br/>
                         </li>
                     ))}
