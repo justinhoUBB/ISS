@@ -87,8 +87,6 @@ export default class Login extends  Component {
 
                  { this.state.submitted &&  <div className="conferenceList"> <h2> Welcome, {this.state.email}!</h2>
                      <a href="http://localhost:3000/dashboard"> Dashboard </a><br/>
-                     <Link to={{  pathname: `/dashboard/${this.state.email}`}}>Dashboard</Link>
-
                      <Button className="buttonLogOut" > Log out </Button>
                  </div>
 

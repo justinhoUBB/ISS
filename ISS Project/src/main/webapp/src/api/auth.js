@@ -16,7 +16,7 @@ export function  register() {
     }).then((response) => {
                 if (!response.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
-                        localStorage.setItem("isCommitteeMember", this.state.is_committee_member);
+                        localStorage.setItem("isCommitteeMember", response.data.role);
                         this.props.history.push('/dashboard');
         }
 
@@ -34,7 +34,7 @@ export function login() {
 
                     if (!result.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
-                        localStorage.setItem("isCommitteeMember", result.data.is_committee_member);
+                        localStorage.setItem("isCommitteeMember", result.data.role);
 
                    }
 

@@ -13,7 +13,7 @@ const EnsureCorrectUserLoggedIn = (Component, currentPath, props) => {
     if (!localStorage.loggedInUser) {
         return <Redirect to="/"/>
     } else {
-        if ( localStorage.isCommitteeMember) {
+        if ( localStorage.isCommitteeMember === "true") {
             return <Component {...props}/>;
         } else {
             return <AccessDenied/>

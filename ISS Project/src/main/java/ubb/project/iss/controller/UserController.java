@@ -27,13 +27,13 @@ public class UserController {
     }
 
 //    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
- //   UserAccount getById(@PathVariable Long id) {
- //       return userService.getById(id);
- //   }
+    //   UserAccount getById(@PathVariable Long id) {
+    //       return userService.getById(id);
+    //   }
 
-   // @RequestMapping(value = "/users/{email}", method = RequestMethod.GET)
+    // @RequestMapping(value = "/users/{email}", method = RequestMethod.GET)
     //Optional<UserAccount>  getByEmail(@PathVariable  String email){
-      //      return userService.getByMail(email);
+    //      return userService.getByMail(email);
     //}
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -44,13 +44,14 @@ public class UserController {
 
         if(userOptional.isPresent()){
             UserAccount user = userOptional.get();
+
             if(user.getPassword().equals( loginForm.getPassword() ) ) {
 
                 return AuthenticationResponse.builder()
                         .status("Success")
                         .userAccount(null)
                         .message("User found!")
-                        .role(null)
+                        .role(user.is_committee_member())
                         .isError(false)
                         .build();
             }
@@ -58,7 +59,7 @@ public class UserController {
         return AuthenticationResponse.builder()
                 .status("error")
                 .message("No registered user with this username and password")
-                .role("")
+                .role(false)
                 .userAccount(null)
                 .isError(true)
                 .build();
@@ -72,10 +73,10 @@ public class UserController {
         Optional<UserAccount> user = userService.getByMail(email);
 
         if(user.isPresent()){
-
+            UserAccount user2 = user.get();
             return AuthenticationResponse.builder()
                     .status("Success")
-                    .role(null)
+                    .role(user2.is_committee_member())
                     .centerId(0)
                     .message("The user is now logged")
                     .isError(false)
@@ -85,7 +86,7 @@ public class UserController {
 
         return AuthenticationResponse.builder()
                 .status("failure")
-                .role("")
+                .role(false)
                 .userAccount(null)
                 .message("The user doesn't exist")
                 .isError(true)
@@ -113,7 +114,7 @@ public class UserController {
 
         return AuthenticationResponse.builder()
                 .status("failure")
-                .role("")
+                .role(false)
                 .userAccount(null)
                 .message("The user doesn't exist")
                 .isError(true)

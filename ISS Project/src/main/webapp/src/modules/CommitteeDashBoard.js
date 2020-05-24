@@ -63,7 +63,6 @@ export default class CommitteeDashboard extends Component{
                 <h1> Conference Management System</h1>
 
                 <a href="http://localhost:3000/addconference"> Add conference</a>
-                <a href="http://localhost:3000/reviewpaper"> Review Paper </a>
                 <a href="http://localhost:3000/dashboard"> Dashboard </a>
                 <br/>
                 <br/>

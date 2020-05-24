@@ -2,6 +2,8 @@ package ubb.project.iss.response;
 
 import lombok.*;
 import ubb.project.iss.domain.UserAccount;
+import lombok.*;
+import ubb.project.iss.domain.UserAccount;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,7 +14,7 @@ public class AuthenticationResponse {
     private String status;
     private Boolean isError;
     private UserAccount userAccount;
-    private String role;
+    private Boolean role;
     private String message;
     private int centerId;
 }
