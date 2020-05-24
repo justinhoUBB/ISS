@@ -19,7 +19,6 @@ export default class Home extends Component{
                 <div>
                 <h1> Conference Management System</h1>
                 <Login/>
-                <p> You don't have an account? <ButtonComponent onClick={this.redirectToRegister}> Sign up !</ButtonComponent> </p>
             </div>
         );
     }

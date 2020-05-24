@@ -21,6 +21,7 @@ export default class Conference extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.register  = paper.addPaper.bind(this);
      this.createText = this.createText.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     createText(){
@@ -33,6 +34,10 @@ export default class Conference extends Component {
             [event.target.name]: event.target.value
         });
 
+    }
+
+    logout() {
+        this.props.history.push('/logout');
     }
 
     handleSubmit(event) {
@@ -103,7 +108,7 @@ export default class Conference extends Component {
                     <button type="submit"> Add Paper </button><br/>
                 </form>}
 
-                <Button className="buttonLogOut"> Log out </Button>
+                <Button className="buttonLogOut" onClick={this.logout}> Log out </Button>
 
             </div>
         );

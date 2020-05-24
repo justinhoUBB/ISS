@@ -4,7 +4,7 @@ import {Table, Button} from 'reactstrap';
 import {Link,Route,BrowserRouter,Switch,useParams} from 'react-router-dom';
 import Conference  from "./Conference";
 import ReactDOM from 'react-dom'
-
+import { withRouter } from "react-router-dom";
 
 export default class Dashboard extends Component{
 
@@ -15,6 +15,7 @@ export default class Dashboard extends Component{
             isLoaded:false,
             isShow:false
         }
+        this.logout = this.logout.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +30,9 @@ export default class Dashboard extends Component{
             })
     }
 
+    logout() {
+        this.props.history.push('/logout');
+    }
 
     render(){
 
@@ -62,7 +66,7 @@ export default class Dashboard extends Component{
                         </li>
                     ))}
                 </ul>
-                <Button className="buttonLogOut"> Log out </Button>
+                <Button className="buttonLogOut" onClick={this.logout}> Log out </Button>
 
 
             </div>

@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
 import './App.css';
 import {BrowserRouter, Switch, Route} from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Home from './modules/Home';
 import Dashboard from './modules/Dashboard'
 import Register from './modules/Register'
 import AddConference from "./modules/AddConference";
 import Conference from "./modules/Conference";
+import Logout from "./modules/Logout";
 
 export default class App extends Component{
 
@@ -18,6 +20,7 @@ export default class App extends Component{
                 <BrowserRouter>
                     <Switch>
                         <Route exact path = "/" component = {Home}/>
+                        <Route exact path = "/logout" component = {Logout}/>
                         <Route exact path = "/register" component = {Register}/>
                         <Route exact path ="/dashboard" component={Dashboard}/>
                         <Route exact path ="/addconference" component={AddConference}/>

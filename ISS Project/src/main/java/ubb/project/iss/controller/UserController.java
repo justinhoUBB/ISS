@@ -26,10 +26,10 @@ public class UserController {
         return userService.save(user);
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
-    UserAccount getById(@PathVariable Long id) {
-        return userService.getById(id);
-    }
+//    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
+ //   UserAccount getById(@PathVariable Long id) {
+ //       return userService.getById(id);
+ //   }
 
    // @RequestMapping(value = "/users/{email}", method = RequestMethod.GET)
     //Optional<UserAccount>  getByEmail(@PathVariable  String email){

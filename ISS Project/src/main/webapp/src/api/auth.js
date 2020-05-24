@@ -1,6 +1,11 @@
+import React from "react";
 const axios = require('axios');
 
-function  register() {
+
+
+
+
+export function  register() {
     axios.post('http://localhost:8080/api/users/', {
         affiliation: this.state.affiliation,
         email: this.state.email,
@@ -19,20 +24,18 @@ function  register() {
 
 }
 
-{/*
-   Nu vrea sa meargă săracia de login, da' cred că problema e din controller, nu face Spring mapping-urile pe
-   /login, /logout, /api/users/{email} sau /api/users/{id}
- */}
 
-function login() {
+
+export function login() {
     axios.post('http://localhost:8080/api/login', { email: this.state.email, password: this.state.password })
         .then((response) => {
             if (!response.data.isError) {
-                axios.get('http://localhost:8080/api/users/' + this.state.email)
-                    .then((result) => {
-
+                axios.get('http://localhost:8080/api/users/' + this.state.email).then((result) => {
+                    if (!result.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isComitteeMember", this.state.is_committee_member);
+
+                    }
 
                     });
 
@@ -40,8 +43,8 @@ function login() {
         })
 }
 
-function logout() {
-    return axios.post('http://localhost:8080/api//logout', { email: localStorage.loggedInUser })
+export function logout() {
+    return axios.post('http://localhost:8080/api/logout', { email: localStorage.loggedInUser })
         .then(() => {
             localStorage.removeItem("loggedInUser");
             this.setState({ success: true });
@@ -51,7 +54,3 @@ function logout() {
         });
 }
 
-
-module.exports = {
-    register,login,logout
-};

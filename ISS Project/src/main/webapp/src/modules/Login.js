@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Button} from "reactstrap";
 
 const auth = require('../api/auth');
 
@@ -16,15 +17,19 @@ export default class Login extends  Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.login = auth.login.bind(this);    }
+        this.login = auth.login.bind(this);
+        this.logout = this.logout.bind(this);}
 
 
-    async handleSubmit(event){
+    async handleSubmit(event) {
         event.preventDefault();
-        this.setState({ submitted: true });
+        this.setState({submitted: true});
         this.login();
     }
 
+    redirectToRegister() {
+        this.props.history.push('/register');
+    }
 
     handleChange(event){
         this.setState({
@@ -32,13 +37,18 @@ export default class Login extends  Component {
         });
 
     }
+    logout() {
+        this.props.history.push('/logout');
+    }
 
 
     render()  {
 
         return (
-                <div>
-                <form onSubmit={this.handleSubmit}>
+             <div>
+                 {!this.state.submitted &&
+                <div className="login">
+                    <form onSubmit={this.handleSubmit}>
                     <input type ="text"
                            name="email"
                            placeholder ="email"
@@ -56,7 +66,21 @@ export default class Login extends  Component {
                         <button type="submit"> Log in</button>
 
                 </form>
-                </div>
+
+                 <p> You don't have an account? <a href="http://localhost:3000/register"> Sign up !</a> </p>
+                    </div>
+                 }
+
+
+                 {this.state.submitted && <div className="conferenceList"> <h2> Welcome, {this.state.email} !</h2>
+                 <a href="http://localhost:3000/addconference"> Add conference</a>
+                     <a href="http://localhost:3000/dashboard"> Dashboard </a><br/>
+                     <Button className="buttonLogOut" > Log out </Button>
+                 </div>}
+
+                 </div>
+
+
 
         );
     }

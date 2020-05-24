@@ -19,6 +19,7 @@ export default class Register extends  Component {
         this.handleChange = this.handleChange.bind(this);
         this.register  = conference.addConference.bind(this);
         this.redirectToDashboard = this.redirectToDashboard.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     handleChange(event){
@@ -37,6 +38,11 @@ export default class Register extends  Component {
 
         event.preventDefault();
         this.register();
+    }
+
+
+    logout() {
+        this.props.history.push('/logout');
     }
 
     render()  {
@@ -110,7 +116,7 @@ export default class Register extends  Component {
                            required/><br/><br/>
 
                     <button type="submit"> Add Conference </button><br/>
-                    <Button className="buttonLogOut"> Log out </Button>
+                    <Button className="buttonLogOut"  onClick={this.logout}> Log out </Button>
                 </form>
             </div>
 
