@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
+const auth = require('../api/auth');
 
 export default class Register extends  Component {
     constructor(props) {
@@ -18,6 +19,7 @@ export default class Register extends  Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.redirectToHome = this.redirectToHome.bind(this);
+        this.register =auth.register.bind(this);
     }
 
     handleChange(event){
@@ -31,41 +33,11 @@ export default class Register extends  Component {
         this.props.history.push('/');
     }
 
-    handleSuccessfulAuth(event){
-
-        this.props.history.push('/dashboard');
-    };
 
     handleSubmit(event) {
 
-        const {email, password,first_name,last_name,is_committee_member,affiliation} = this.state;
-        axios.post(
-            'http://localhost:8080/api/users',
-            {
-                user_account: {
-                    affiliation: affiliation,
-                    email: email,
-                    first_name: first_name,
-                    is_committee_member: is_committee_member,
-                    last_name: last_name,
-                    password: password
-
-                }
-            },
-            {withCredentials: true}
-        ).then(response => {
-
-            alert(response.data.status);
-            if (response.data.status === "created" ){
-                this.props.handleSuccessfulAuth(response.data);
-
-            }
-        })
-            .catch(error => {
-                console.log("Log in error", error);
-
-            });
         event.preventDefault();
+        this.register();
     }
 
     render()  {

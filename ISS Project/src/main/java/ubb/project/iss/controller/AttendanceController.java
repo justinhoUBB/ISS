@@ -10,6 +10,7 @@ import ubb.project.iss.service.AttendanceService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge=3600,allowedHeaders = "*", allowCredentials = "true")
 public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;

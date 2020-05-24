@@ -8,6 +8,7 @@ import ubb.project.iss.service.PaperService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge=3600,allowedHeaders = "*", allowCredentials = "true")
 public class PaperController {
     @Autowired
     private PaperService paperService;

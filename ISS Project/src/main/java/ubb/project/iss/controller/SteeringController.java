@@ -7,6 +7,7 @@ import ubb.project.iss.service.SteeringService;
 
 import java.util.List;
 @RestController
+@CrossOrigin(origins = "http://localhost:3000", maxAge=3600,allowedHeaders = "*", allowCredentials = "true")
 public class SteeringController {
     @Autowired
     private SteeringService steeringCommitteeService;
