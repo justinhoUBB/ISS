@@ -16,7 +16,7 @@ export function  register() {
     }).then((response) => {
                 if (!response.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
-                        localStorage.setItem("isComitteeMember", this.state.is_committee_member);
+                        localStorage.setItem("isCommitteeMember", this.state.is_committee_member);
                         this.props.history.push('/dashboard');
         }
 
@@ -31,11 +31,12 @@ export function login() {
         .then((response) => {
             if (!response.data.isError) {
                 axios.get('http://localhost:8080/api/users/' + this.state.email).then((result) => {
+
                     if (!result.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
-                        localStorage.setItem("isComitteeMember", this.state.is_committee_member);
+                        localStorage.setItem("isCommitteeMember", result.data.is_committee_member);
 
-                    }
+                   }
 
                     });
 

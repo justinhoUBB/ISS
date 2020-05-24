@@ -19,6 +19,7 @@ export default class Register extends  Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.redirectToHome = this.redirectToHome.bind(this);
+        this.handleChangeCommittee = this.handleChangeCommittee.bind(this);
         this.register =auth.register.bind(this);
     }
 
@@ -28,6 +29,14 @@ export default class Register extends  Component {
         });
 
     }
+
+    handleChangeCommittee(event){
+        this.setState({
+            is_committee_member: !this.state.is_committee_member
+        });
+
+    }
+
 
     redirectToHome() {
         this.props.history.push('/');
@@ -60,7 +69,7 @@ export default class Register extends  Component {
                            onChange={this.handleChange}
                            required/><br/><br/>
 
-                    <input type ="text"
+                    <input type ="email"
                            name="email"
                            placeholder ="email"
                            value={this.state.email}
@@ -84,13 +93,9 @@ export default class Register extends  Component {
 
                            Are you a comitte Member?
                     <br/>
-                    <input type ="boolean"
-                           name = "is_committee_member"
-                           placeholder="Are you a Committe Member?"
-                           value={this.state.is_committee_member}
-                           onChange={this.handleChange}
-                           required/><br/><br/>
-
+                    <input type="checkbox" name="is_committee_member" value={this.state.is_committee_member}
+                           onChange={this.handleChangeCommittee}/>
+                    <label htmlFor="is_committee_member"> Yes </label><br/><br/>
                     <button type="submit"> Register </button>
 
                 </form>

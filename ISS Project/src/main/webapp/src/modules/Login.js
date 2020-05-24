@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Button} from "reactstrap";
-
+import { useHistory } from 'react-router';
 const auth = require('../api/auth');
 
 
@@ -12,7 +12,8 @@ export default class Login extends  Component {
             email: "",
             password: "",
             submitted: false,
-            loading: false,
+            loading: true,
+            redirect: false,
             error: ''
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +26,10 @@ export default class Login extends  Component {
         event.preventDefault();
         this.setState({submitted: true});
         this.login();
+        this.setState({ loading: false,redirect: true});
+
     }
+
 
     redirectToRegister() {
         this.props.history.push('/register');
@@ -43,9 +47,13 @@ export default class Login extends  Component {
 
 
     render()  {
+        if (!localStorage.loggedInUser){
+
+
+
 
         return (
-             <div>
+        <div>
                  {!this.state.submitted &&
                 <div className="login">
                     <form onSubmit={this.handleSubmit}>
@@ -72,17 +80,34 @@ export default class Login extends  Component {
                  }
 
 
-                 {this.state.submitted && <div className="conferenceList"> <h2> Welcome, {this.state.email} !</h2>
-                 <a href="http://localhost:3000/addconference"> Add conference</a>
+                 { this.state.submitted && <div className="conferenceList"> <h2> Welcome, {this.state.email} !</h2>
                      <a href="http://localhost:3000/dashboard"> Dashboard </a><br/>
                      <Button className="buttonLogOut" > Log out </Button>
                  </div>}
 
-                 </div>
 
-
+        </div>
 
         );
-    }
+
+        }
+        else{
+            return(
+
+                <div className="login" style={{height: '100vh'}}>
+                    <div className="row align-items-center" style={{height: '100vh'}}>
+                        <div className="col-11" style={{textAlign: 'center'}}>
+
+                            <a href="http://localhost:3000/addconference"> Add conference</a>
+                            <a href="http://localhost:3000/dashboard"> Dashboard </a>
+                            <h2>You are already logged in!</h2>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+
+        }
 }
 

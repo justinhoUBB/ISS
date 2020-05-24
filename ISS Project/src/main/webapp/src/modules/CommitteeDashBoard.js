@@ -6,7 +6,7 @@ import Conference  from "./Conference";
 import ReactDOM from 'react-dom'
 import { withRouter } from "react-router-dom";
 
-export default class Dashboard extends Component{
+export default class CommitteeDashboard extends Component{
 
     constructor(props) {
         super(props);
@@ -19,7 +19,7 @@ export default class Dashboard extends Component{
     }
 
     componentDidMount() {
-        fetch('http://localhost:8080/api/conferences')
+        fetch('http://localhost:8080/api/papers')
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -41,23 +41,27 @@ export default class Dashboard extends Component{
 
             <div  className ="conferenceList">
                 <h1> Conference Management System</h1>
-                <a href="http://localhost:3000/comdashboard"> Committee Dashboard </a>
-               <br/>
-               <br/>
+
+                <a href="http://localhost:3000/addconference"> Add conference</a>
+                <a href="http://localhost:3000/reviewpaper"> Review Paper </a>
+                <a href="http://localhost:3000/dashboard"> Dashboard </a>
+                <br/>
+                <br/>
 
 
                 <ul>
                     {items.map(item=>(
                         <li key={item.id}>
 
-                            {item.topics}  Conference  <br/>
+                            {item.paper_title}  Paper  <br/>
 
-                                {item.description}<br/>
-                                Starting date: {item.starting_date}<br/>
-                                Number of seats: {item.number_of_seats_per_room * item.number_of_rooms}
-                        <br/>
+                            List of Authors: {item.list_of_authors}<br/>
+                            Keywords: {item.keywords}<br/>
+                            Content: {item.paper_content}<br/>
 
-                            <Link to={{ activeClassName:'idk', pathname: `/conferences/${item.id}`}}>See more</Link>
+                            <br/>
+
+                            <Button color="succes"> Bid</Button>
                             <br/><br/><br/>
                         </li>
                     ))}

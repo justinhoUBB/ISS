@@ -50,6 +50,8 @@ export default class Register extends  Component {
             <div className="conference">
                 <h1> Conference Management System</h1>
                 <a href="http://localhost:3000/dashboard"> Dashboard </a>
+                <a href="http://localhost:3000/comdashboard"> Committee Dashboard </a>
+
                 <br/><br/>
 
                 <form onSubmit={this.handleSubmit}>
