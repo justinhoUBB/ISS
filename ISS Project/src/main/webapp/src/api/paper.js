@@ -14,14 +14,15 @@ function  addPaper() {
         if (!response.data.isError) {
             this.state.paper_id=response.data.id;
             this.props.history.push('/dashboard');
+
         }
 
-    })
-
+    });
 }
 
 
 function addReview(){
+
     axios.post('http://localhost:8080/api/paper_review/', {
 
         member_id: +this.state.member_id,
@@ -32,6 +33,7 @@ function addReview(){
     }).then((response) => {
         if (!response.data.isError) {
             this.props.history.push('/dashboard');
+
         }
 
     })
@@ -45,7 +47,7 @@ function addPaperSubmission(){
     axios.post('http://localhost:8080/api/submissions/', {
 
         user_id: this.state.publisher_id,
-        paper_id: this.state.paper_id,
+        paper_id: +this.state.paper_id,
         conference_id: this.state.conference_id
 
 

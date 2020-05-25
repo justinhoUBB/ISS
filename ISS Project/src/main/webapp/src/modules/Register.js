@@ -94,7 +94,7 @@ export default class Register extends  Component {
                            Are you a committee Member?
                     <br/>
                     <input type="checkbox" name="is_committee_member" value={this.state.is_committee_member}
-                           onChange={this.handleChangeCommittee}/>
+                           onChange={this.handleChangeCommittee}/>{this.state.is_committee_member}
                     <label htmlFor="is_committee_member"> Yes </label><br/><br/>
                     <button type="submit"> Register </button>
 

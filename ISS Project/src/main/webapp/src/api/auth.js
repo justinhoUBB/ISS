@@ -18,8 +18,7 @@ export function  register() {
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", response.data.role);
                         localStorage.setItem("loggedInUserID", response.data.userId);
-                    this.props.history.push('/dashboard');
-        }
+                    this.props.history.push('/dashboard');          }
 
     })
 

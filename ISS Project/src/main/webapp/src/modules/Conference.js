@@ -9,6 +9,8 @@ const conference = require('../api/conference')
 
 export default class Conference extends Component {
 
+
+
     constructor(props) {
         super(props);
         this.state= {
@@ -109,9 +111,34 @@ export default class Conference extends Component {
 
         })
     }
+    changeFile(e)
+    {
+        this.readSingleFile(e);
+    }
+    readSingleFile(e) {
+        let file = e.target.files[0];
+        if (!file) {
+            return;
+        }
+        let reader = new FileReader();
+        reader.onload = (e) =>{
+            console.log("nuuu  "+e);
+            let contents = e.target.result;
+            this.displayContents(contents);
+        };
+        reader.readAsText(file);
+    }
+
+    displayContents(contents) {
+        let element = document.getElementById('file-content');
+        this.state.content=contents;
+        element.textContent = contents;
+    }
+
 
 
     render(){
+
         return (
 
             <div  id="conference" className ="conferenceList">
@@ -169,14 +196,22 @@ export default class Conference extends Component {
                     Content:<br/>
                     <input type ="file"
                            name = "content"
+                           id="file-input"
                            placeholder="content"
                            value={this.state.content}
-                           onChange={this.handleChange}
+                           onChange={(e)=>{
+                               console.log("daaa   "+e.target);
+                               this.handleChange(e);
+                               this.changeFile(e);
+                           }}
                            required/><br/>
                            <br/>
-
-
+                           <h3>Content of file</h3>
                     <button type="submit"> Add Paper </button><br/>
+                            <pre id="file-content"style={{textAlign: 'left'}} ></pre>
+
+
+
                 </form>
                 }
                 { (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date)) && localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
@@ -244,7 +279,9 @@ export default class Conference extends Component {
 
             </div>
         );
-}
+
+    }
+
 };
 
 

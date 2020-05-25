@@ -79,6 +79,9 @@ export default class CommitteeDashboard extends Component{
                             List of Authors: {item.list_of_authors}<br/>
                             Keywords: {item.keywords}<br/>
                             Content: {item.content}<br/>
+                            <Button color="succes" onClick={()=>this.openFile(item.content)}>View the document</Button>
+
+
 
                             <br/>
 
@@ -97,5 +100,9 @@ export default class CommitteeDashboard extends Component{
     }
 
 
+    openFile(str) {
+
+        window.open(str);
+    }
 };
 
