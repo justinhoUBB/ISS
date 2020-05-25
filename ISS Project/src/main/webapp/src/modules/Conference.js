@@ -161,6 +161,7 @@ export default class Conference extends Component {
 
                 {this.state.isShowDeadline &&
                 <form onSubmit={this.handleSubmit2}>
+                    <br/>
                     Bid deadline: <br/>
                     <input type ="date"
                            name = "bid_deadline"
