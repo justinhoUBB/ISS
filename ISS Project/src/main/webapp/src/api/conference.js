@@ -19,13 +19,13 @@ function  addConference() {
 }
 function updateConference(){
     axios.put('http://localhost:8080/api/conferences/'+ this.state.conference_id, {
-        description: this.state.conference_description,
-        topics: this.state.conference_topics,
+        description: "",
+        topics: "",
         starting_date: this.state.starting_date,
         paper_deadline: this.state.paper_deadline,
         bid_deadline: this.state.bid_deadline,
-        number_of_rooms: this.state.conference_number_of_rooms,
-        number_of_seats_per_room: this.state.conference_number_of_seats_per_room
+        number_of_rooms: 0,
+        number_of_seats_per_room: 0
     }).then((response) =>{
         this.props.history.push('/dashboard');
     });

@@ -24,7 +24,12 @@ public class ConferenceController {
     }
 
     @RequestMapping(value = "/conferences/{id}", method = RequestMethod.GET)
-    Conference getById(@PathVariable Long id) {
+   Conference getById(@PathVariable Long id) {
         return conferenceService.getById(id);
+    }
+
+    @RequestMapping(value = "/conferences/{id}", method = RequestMethod.PUT)
+    Conference update(@PathVariable Long id,@RequestBody Conference conference) {
+        return conferenceService.update(conference,id);
     }
 }

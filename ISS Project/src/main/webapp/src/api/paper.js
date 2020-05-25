@@ -43,7 +43,7 @@ function addPaperSubmission(){
 
     axios.post('http://localhost:8080/api/submissions/', {
 
-        user_id: this.state.member_id,
+        user_id: this.state.publisher_id,
         paper_id: this.state.paper_id,
         conference_id: this.state.conference_id
 

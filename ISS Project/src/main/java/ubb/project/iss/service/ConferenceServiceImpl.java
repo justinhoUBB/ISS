@@ -2,7 +2,9 @@ package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ubb.project.iss.domain.Conference;
+import ubb.project.iss.domain.Supervisor;
 import ubb.project.iss.repository.ConferenceRepository;
 
 import java.util.List;
@@ -25,5 +27,15 @@ public class ConferenceServiceImpl implements ConferenceService {
     public Conference getById(Long id) {
         Conference update = conferenceRepository.findById(id).orElse(null);
         return update;
+    }
+
+    @Override
+    @Transactional
+    public Conference update(Conference conference, Long id) {
+        Conference oldConference = conferenceRepository.findById(id).get();
+        oldConference.setPaper_deadline(conference.getPaper_deadline());
+        oldConference.setBid_deadline(conference.getBid_deadline());
+        oldConference.setStarting_date(conference.getStarting_date());
+        return oldConference;
     }
 }

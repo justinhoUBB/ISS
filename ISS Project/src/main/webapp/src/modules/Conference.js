@@ -24,7 +24,7 @@ export default class Conference extends Component {
             paper_deadline:"",
             bid_deadline:"",
             starting_date:"",
-            content:"",
+            content:null,
             isShow: false,
             isShowDeadline:false,
             isShowAttendance:false
@@ -33,6 +33,7 @@ export default class Conference extends Component {
         this.handleSubmit2 = this.handleSubmit2.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleChangeFile = this.handleChangeFile.bind(this);
         this.register  = paper.addPaper.bind(this);
         this.submission  = paper.addPaperSubmission.bind(this);
         this.changeDeadlines = conference.updateConference.bind(this);
@@ -42,7 +43,19 @@ export default class Conference extends Component {
         this.createTextDeadline = this.createTextDeadline.bind(this);
         this.createTextAttendance = this.createTextAttendance.bind(this);
         this.logout = this.logout.bind(this);
+        this.getCurrentDate =this.getCurrentDate.bind(this);
 
+    }
+
+
+    getCurrentDate(separator='-'){
+
+        let newDate = new Date();
+        let date = newDate.getDate();
+        let month = newDate.getMonth() + 1;
+        let year = newDate.getFullYear();
+
+        return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
     }
 
     createTextAttendance(){
@@ -90,6 +103,13 @@ export default class Conference extends Component {
         this.changeDeadlines();
     }
 
+    handleChangeFile(event){
+        this.setState({
+            content: event.target.files[0]
+
+        })
+    }
+
 
     render(){
         return (
@@ -110,10 +130,12 @@ export default class Conference extends Component {
                 <p> Number of seats: {(this.props.location.state.conference_number_of_rooms * this.props.location.state.conference_number_of_seats_per_room)}</p>
                 <p> Starting date: {(this.props.location.state.conference_starting_date)}</p>
 
+                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) &&
+                <p> Paper submission deadline: {(this.props.location.state.conference_paper_deadline)}</p>}
 
-                <p> Paper submission deadline: {(this.props.location.state.conference_paper_deadline)}</p>
 
-                {!this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
+                {(Date.parse(this.getCurrentDate()) > Date.parse(this.props.location.state.conference_paper_deadline)) && <p> Papers can no longer be submitted at this date for this conference.</p>}
+                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) && !this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
 
                 {this.state.isShow &&
                 <form onSubmit={this.handleSubmit}>
@@ -157,7 +179,7 @@ export default class Conference extends Component {
                     <button type="submit"> Add Paper </button><br/>
                 </form>
                 }
-                {localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
+                { (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date)) && localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
 
                 {this.state.isShowDeadline &&
                 <form onSubmit={this.handleSubmit2}>
@@ -195,7 +217,7 @@ export default class Conference extends Component {
                 </form>
                 }
 
-                {!this.state.isShowAttendance&& <form onSubmit={this.handleAttend}>
+                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date))  &&!this.state.isShowAttendance&& <form onSubmit={this.handleAttend}>
                     <br/>
                 <button type="submit" onClick={this.createTextAttendance}> Attend Conference </button><br/>
                 </form>}
@@ -205,6 +227,16 @@ export default class Conference extends Component {
                         <p> Thank you for choosing to attend {(this.props.location.state.conference_topics)} Conference .</p>
                     </div>
                 }
+
+
+                {(Date.parse(this.getCurrentDate()) > Date.parse(this.props.location.state.conference_starting_date))
+                    &&
+                    <div>
+                        <p> This conference has already been held.</p>
+                    </div>
+
+                }
+
 
                 <br/>
                 <br/>
