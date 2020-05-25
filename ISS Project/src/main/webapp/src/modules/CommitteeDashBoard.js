@@ -46,7 +46,8 @@ export default class CommitteeDashboard extends Component{
     }
     reviewPaperWithId(id){
 
-        this.userId=this.state.users.filter(item=>item.email=localStorage.loggedInUser).map(item=>item.id);
+
+        this.userId=this.state.users.filter(item=>item.email===localStorage.loggedInUser).map(item=>item.id);
         this.props.history.push({
             pathname: '/reviewpaper',
             data: [id,this.userId]
