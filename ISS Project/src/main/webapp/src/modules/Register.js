@@ -91,7 +91,7 @@ export default class Register extends  Component {
                            onChange={this.handleChange}
                            required/><br/><br/>
 
-                           Are you a comitte Member?
+                           Are you a committee Member?
                     <br/>
                     <input type="checkbox" name="is_committee_member" value={this.state.is_committee_member}
                            onChange={this.handleChangeCommittee}/>

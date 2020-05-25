@@ -10,11 +10,12 @@ export function  register() {
         affiliation: this.state.affiliation,
         email: this.state.email,
         first_name: this.state.first_name,
-        is_committee_member: this.state.is_committee_member,
+        _committee_member: this.state.is_committee_member,
         last_name: this.state.last_name,
         password: this.state.password
     }).then((response) => {
                 if (!response.data.isError) {
+                        alert(response.data.role);
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", response.data.role);
                         localStorage.setItem("loggedInUserID", response.data.userId);

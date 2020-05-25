@@ -3,10 +3,7 @@ import {Redirect} from "react-router-dom";
 import AccessDenied from "../modules/AccesDenied";
 
 
-const permissions = {
-    true: ['/dashboard','/addconference', '/conferences/:id','/logout'],
-    false: ['/dashboard','/conferences/:id','/logout']
-}
+
 
 const EnsureCorrectUserLoggedIn = (Component, currentPath, props) => {
 

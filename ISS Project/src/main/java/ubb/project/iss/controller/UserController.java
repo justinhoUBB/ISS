@@ -22,10 +22,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    UserAccount save(@RequestBody UserAccount user) {
-        return userService.save(user);
-    }
+    AuthenticationResponse save(@RequestBody UserAccount user ) {
 
+        Optional<UserAccount> userOptional = Optional.ofNullable(userService.save(user));
+
+        return AuthenticationResponse.builder()
+                    .status("failure")
+                    .userId(user.getId())
+                    .role(user.is_committee_member())
+                    .build();
+
+
+    }
 //    @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     //   UserAccount getById(@PathVariable Long id) {
     //       return userService.getById(id);

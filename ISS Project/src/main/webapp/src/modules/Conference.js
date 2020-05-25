@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import '../App.css';
 import {Table, Button} from 'reactstrap';
+import ApiService from '../api/file'
 import { Link } from 'react-router-dom';
 const paper = require('../api/paper');
 const auth = require('../api/auth');
@@ -44,9 +45,23 @@ export default class Conference extends Component {
         this.createTextAttendance = this.createTextAttendance.bind(this);
         this.logout = this.logout.bind(this);
         this.getCurrentDate =this.getCurrentDate.bind(this);
-
+        this. onFileChangeHandler  = this.onFileChangeHandler.bind(this);
     }
 
+
+    onFileChangeHandler = (e) => {
+        e.preventDefault();
+        this.setState({
+            selectedFile: e.target.files[0]
+        });
+        const formData = new FormData();
+        formData.append('file', this.state.selectedFile);
+        ApiService.upload(formData)
+            .then(res => {
+                console.log(res.data);
+                alert("File uploaded successfully.")
+            })
+    };
 
     getCurrentDate(separator='-'){
 
@@ -171,7 +186,7 @@ export default class Conference extends Component {
                            name = "content"
                            placeholder="content"
                            value={this.state.content}
-                           onChange={this.handleChange}
+                           onChange={this.onFileChangeHandler}
                            required/><br/>
                            <br/>
 
