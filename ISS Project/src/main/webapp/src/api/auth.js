@@ -17,7 +17,8 @@ export function  register() {
                 if (!response.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", response.data.role);
-                        this.props.history.push('/dashboard');
+                        localStorage.setItem("loggedInUserID", response.data.userId);
+                    this.props.history.push('/dashboard');
         }
 
     })
@@ -35,8 +36,9 @@ export function login() {
                     if (!result.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", result.data.role);
+                        localStorage.setItem("loggedInUserID", result.data.userId);
 
-                   }
+                    }
 
                     });
 

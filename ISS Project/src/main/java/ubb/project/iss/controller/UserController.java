@@ -50,7 +50,6 @@ public class UserController {
                 return AuthenticationResponse.builder()
                         .status("Success")
                         .userAccount(null)
-                        .message("User found!")
                         .role(user.is_committee_member())
                         .isError(false)
                         .build();
@@ -58,7 +57,7 @@ public class UserController {
         }
         return AuthenticationResponse.builder()
                 .status("error")
-                .message("No registered user with this username and password")
+                .userId(0)
                 .role(false)
                 .userAccount(null)
                 .isError(true)
@@ -77,8 +76,8 @@ public class UserController {
             return AuthenticationResponse.builder()
                     .status("Success")
                     .role(user2.is_committee_member())
-                    .centerId(0)
-                    .message("The user is now logged")
+                    .centerId(user2.getId())
+                    .userId(user2.getId())
                     .isError(false)
                     .userAccount(user.orElse(null))
                     .build();
@@ -88,7 +87,7 @@ public class UserController {
                 .status("failure")
                 .role(false)
                 .userAccount(null)
-                .message("The user doesn't exist")
+                .userId(0)
                 .isError(true)
                 .build();
 
@@ -107,7 +106,7 @@ public class UserController {
 
             return AuthenticationResponse.builder()
                     .status("Success")
-                    .message("The user is now logged out")
+                    .userId(0)
                     .isError(false)
                     .build();
         }
@@ -116,7 +115,7 @@ public class UserController {
                 .status("failure")
                 .role(false)
                 .userAccount(null)
-                .message("The user doesn't exist")
+                .userId(0)
                 .isError(true)
                 .build();
 

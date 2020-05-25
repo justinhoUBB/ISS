@@ -15,6 +15,6 @@ public class AuthenticationResponse {
     private Boolean isError;
     private UserAccount userAccount;
     private Boolean role;
-    private String message;
-    private int centerId;
+    private long userId;
+    private long centerId;
 }

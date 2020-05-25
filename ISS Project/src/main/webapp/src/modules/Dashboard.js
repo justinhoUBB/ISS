@@ -57,7 +57,16 @@ export default class Dashboard extends Component{
                                 Number of seats: {item.number_of_seats_per_room * item.number_of_rooms}
                         <br/>
 
-                            <Link to={{ activeClassName:'idk', pathname: `/conferences/${item.id}`}}>See more</Link>
+                            <Link to={{ activeClassName:'idk', pathname: `/conferences/${item.id}`, state: {
+                                    conference_id: item.id,
+                                    conference_description: item.description,
+                                    conference_topics: item.topics,
+                                    conference_starting_date: item.starting_date,
+                                    conference_paper_deadline: item.paper_deadline,
+                                    conference_bid_deadline: item.bid_deadline,
+                                    conference_number_of_rooms: item.number_of_rooms,
+                                    conference_number_of_seats_per_room:item.number_of_seats_per_room
+                                }}} params={{ conferenceID: item.id,conferenceDescription:item.description, conferenceTopics: item.topics}} >See more</Link>
                             <br/><br/><br/>
                         </li>
                     ))}

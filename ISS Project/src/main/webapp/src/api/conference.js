@@ -17,7 +17,30 @@ function  addConference() {
     })
 
 }
+function updateConference(){
+    axios.put('http://localhost:8080/api/conferences/'+ this.state.conference_id, {
+        description: this.state.conference_description,
+        topics: this.state.conference_topics,
+        starting_date: this.state.starting_date,
+        paper_deadline: this.state.paper_deadline,
+        bid_deadline: this.state.bid_deadline,
+        number_of_rooms: this.state.conference_number_of_rooms,
+        number_of_seats_per_room: this.state.conference_number_of_seats_per_room
+    }).then((response) =>{
+        this.props.history.push('/dashboard');
+    });
+
+}
+
+function attendConference(){
+    axios.post('http://localhost:8080/api/attendances/', {
+        user_id: this.state.user_id,
+        conference_id: this.state.conference_id
+
+    });
+
+}
 
 module.exports = {
-     addConference
+     addConference, updateConference,attendConference
 };

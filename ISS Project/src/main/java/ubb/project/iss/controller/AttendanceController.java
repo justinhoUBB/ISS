@@ -33,7 +33,7 @@ public class AttendanceController {
         return attendanceService.getById(id);
     }
 
-    @RequestMapping(value = "attendances/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/attendances/{id}", method = RequestMethod.DELETE)
     void cancelSignUp(@PathVariable Long id)
     {
         Attendance attendance = attendanceService.getById(id);
