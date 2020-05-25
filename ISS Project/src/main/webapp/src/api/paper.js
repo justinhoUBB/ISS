@@ -12,6 +12,7 @@ function  addPaper() {
 
     }).then((response) => {
         if (!response.data.isError) {
+            this.state.paper_id=response.data.id;
             this.props.history.push('/dashboard');
         }
 

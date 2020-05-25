@@ -15,7 +15,6 @@ export function  register() {
         password: this.state.password
     }).then((response) => {
                 if (!response.data.isError) {
-                        alert(response.data.role);
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", response.data.role);
                         localStorage.setItem("loggedInUserID", response.data.userId);
