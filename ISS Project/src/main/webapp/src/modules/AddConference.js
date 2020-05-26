@@ -134,7 +134,7 @@ export default class Register extends  Component {
                            value={this.state.number_of_seats_per_room}
                            onChange={this.handleChange}
                            required/><br/><br/>
-                    {!this.state.isShow && <button onClick = {this.createText}> Add Members</button>}<br/>
+                    {!this.state.isShow && <button onClick = {this.createText}> Add Members</button>}<br/><br/>
                     <button type="submit"> Add Conference </button><br/>
                     {this.state.isShow &&
                     <ul className="usersUL" >

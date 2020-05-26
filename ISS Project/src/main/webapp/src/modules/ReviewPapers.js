@@ -84,11 +84,6 @@ export default class ReviewPapers extends Component{
 
                 {!this.state.isShow &&
                 <form onSubmit={this.handleSubmit}>
-                    Paper id= {this.state.paper_id}<br></br><br></br>
-
-
-                    Your Id= {this.state.member_id}<br></br><br></br>
-
 
 
                     Remark:<br/>

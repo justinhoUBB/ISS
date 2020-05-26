@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ubb.project.iss.domain.Paper;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PaperService {
 
@@ -13,5 +14,6 @@ public interface PaperService {
     Paper update(Paper paper);
     void delete(Long id);
     Paper getById(Long id);
+    Paper paperReviewed(Long id);
 
 }

@@ -32,7 +32,11 @@ function addReview(){
 
     }).then((response) => {
         if (!response.data.isError) {
-            this.props.history.push('/dashboard');
+            axios.post('http://localhost:8080/api/review_result/');
+            axios.put('http://localhost:8080/api/papers/' + this.state.paper_id).then(()=>{
+                this.props.history.push('/comdashboard');
+
+            })
 
         }
 

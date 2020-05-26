@@ -19,6 +19,7 @@ public class Paper extends BaseEntity<Long>{
     private Long publisher_id;
     private String list_of_authors;
     private String keywords;
+    private boolean reviewed;
 
 
     private String content; // user-ul trebuie sa poata sa uploadeze si paper-ul in sine (cel mai probabil in format .docx sau .pdf)

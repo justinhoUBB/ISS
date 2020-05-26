@@ -156,7 +156,7 @@ public class PaperReviewServiceImpl implements PaperReviewService {
         this.getById(paperReviewID).setRecommendations(newRecommendation);
     }
 
-    public void checkIfApproved() {
+    public boolean checkIfApproved() {
         List<PaperReview> paperReviews = this.getAll();
         List<Paper> papers = paperRepository.findAll();
         List<Long> paperIDs = new ArrayList<Long>();
@@ -182,10 +182,13 @@ public class PaperReviewServiceImpl implements PaperReviewService {
             }
             if (rejects == 0) {
                 this.sendApprovalEmail(userService.getById(paper.getPublisher_id()).getEmail());
+                return true;
             }
             else if (approvals == 0){
                 this.sendDenialEmail(userService.getById(paper.getPublisher_id()).getEmail());
+                return false;
             }
         }
+        return false;
     }
 }

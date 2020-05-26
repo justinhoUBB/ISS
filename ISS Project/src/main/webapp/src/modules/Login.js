@@ -104,7 +104,6 @@ export default class Login extends  Component {
                     <div className="row align-items-center" style={{height: '100vh'}}>
                         <div className="col-11" style={{textAlign: 'center'}}>
 
-                            <a href="http://localhost:3000/addconference"> Add conference</a>
                             <a href="http://localhost:3000/dashboard"> Dashboard </a>
                             <h2>You are already logged in!</h2>
                         </div>

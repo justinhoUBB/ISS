@@ -27,4 +27,8 @@ public class PaperReviewController {
     PaperReview getById(@PathVariable Long id) {
         return paperReviewService.getById(id);
     }
+
+    @RequestMapping(value ="/review_result/", method = RequestMethod.POST)
+    Boolean checkReview(){return paperReviewService.checkIfApproved();}
+
 }

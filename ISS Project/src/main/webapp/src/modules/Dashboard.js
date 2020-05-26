@@ -41,7 +41,7 @@ export default class Dashboard extends Component{
 
             <div  className ="conferenceList">
                 <h1> Conference Management System</h1>
-                <a href="http://localhost:3000/comdashboard"> Committee Dashboard </a>
+                {localStorage.isCommitteeMember === "true" && <a href="http://localhost:3000/comdashboard"> Committee Dashboard </a>}
                <br/>
                <br/>
 

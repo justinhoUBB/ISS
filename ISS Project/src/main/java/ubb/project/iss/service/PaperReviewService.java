@@ -13,4 +13,5 @@ public interface PaperReviewService {
     void sendApprovalEmail(String to);
     void assignPapers();
     void update(Long paperReviewID, Integer newRemark, String newRecommendation);
+    boolean checkIfApproved();
 }

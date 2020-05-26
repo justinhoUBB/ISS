@@ -71,21 +71,23 @@ export default class CommitteeDashboard extends Component{
 
                 <ul>
                     {items.map(item=>(
-                        <li key={item.id}>
 
+                         <li key={item.id}>
 
                             {item.title}  Paper  <br/>
 
                             List of Authors: {item.list_of_authors}<br/>
                             Keywords: {item.keywords}<br/>
-                            Content: {item.content}<br/>
-                            <Button color="succes" onClick={()=>this.openFile(item.content)}>View the document</Button>
+                            Content:   <Link to={{ activeClassName:'idk', pathname: `/papers/${item.id}`, state: {
+                                 id: item.id,
+                                 title:item.title,
+                                 content:item.content
 
+                             }}}  >View paper</Link>
+                             <br/><br/>
+                             {/*} <Button onClick={()=>this.openFile(item.content)}>View the paper</Button> {*/}
 
-
-                            <br/>
-
-                            <Button color="succes" onClick={()=>this.reviewPaperWithId(item.id)}> Bid</Button>
+                            <Button onClick={()=>this.reviewPaperWithId(item.id)}> Review paper</Button>
                             <br/><br/><br/>
                         </li>
                     ))}

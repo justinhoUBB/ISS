@@ -49,6 +49,8 @@ export function logout() {
     return axios.post('http://localhost:8080/api/logout', { email: localStorage.loggedInUser })
         .then(() => {
             localStorage.removeItem("loggedInUser");
+            localStorage.removeItem("isCommitteeMember");
+            localStorage.removeItem("loggedInUserID");
             this.setState({ success: true });
         })
         .catch(function(err) {

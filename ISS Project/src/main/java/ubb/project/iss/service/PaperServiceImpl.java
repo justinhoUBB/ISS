@@ -9,6 +9,8 @@ import ubb.project.iss.domain.Paper;
 import ubb.project.iss.repository.PaperRepository;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class PaperServiceImpl implements PaperService {
     @Autowired
@@ -24,6 +26,13 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public Paper save(Paper entity) {
         return paperRepository.save(entity);
+   }
+
+   @Override
+   public Paper paperReviewed(Long id){
+        Paper oldPaper = paperRepository.findById(id).orElse(null);
+        oldPaper.setReviewed(true);
+        return oldPaper;
    }
 
     @Override

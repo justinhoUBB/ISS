@@ -6,6 +6,7 @@ import ubb.project.iss.domain.Paper;
 import ubb.project.iss.service.PaperService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000", maxAge=3600,allowedHeaders = "*", allowCredentials = "true")
@@ -26,4 +27,9 @@ public class PaperController {
     Paper getById(@PathVariable Long id) {
         return paperService.getById(id);
     }
+
+    @RequestMapping(value ="/papers/{id}", method = RequestMethod.PUT)
+    Paper paperReviewed(@PathVariable Long id){
+        return paperService.paperReviewed(id);
+        }
 }

@@ -11,6 +11,7 @@ import Logout from "./modules/Logout";
 import {EnsureCorrectUserLoggedIn, EnsureLoggedIn} from "./api/check-user";
 import CommitteeDashBoard from "./modules/CommitteeDashBoard";
 import ReviewPapers from "./modules/ReviewPapers";
+import Paper from "./modules/Paper";
 
 
 export default class App extends Component{
@@ -30,6 +31,7 @@ export default class App extends Component{
                         <Route exact path ="/comdashboard" render={(props) => EnsureCorrectUserLoggedIn(CommitteeDashBoard, "/comdashboard", props)}/>
                         <Route exact path ="/reviewpaper" render={(props) => EnsureCorrectUserLoggedIn(ReviewPapers, "/reviewpaper", props)}/>
                         <Route exact path="/conferences/:id" render={(props) => EnsureLoggedIn(Conference, "/conferences/:id", props)}/>
+                        <Route exact path="/papers/:id" render={(props) => EnsureLoggedIn(Paper, "/papers/:id", props)}/>
                     </Switch>
                 </BrowserRouter>
             </div>

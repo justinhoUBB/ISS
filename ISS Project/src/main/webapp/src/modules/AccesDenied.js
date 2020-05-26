@@ -7,12 +7,12 @@ class AccessDenied extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="conferenceList">
                 <div>
                     <div className="row align-items-center justify-content-center" style={{minHeight: '98vh'}}>
                         <h1>Access denied</h1>
                     </div>
-
+                    <a href="http://localhost:3000/dashboard"> Dashboard </a>
                 </div>
             </div>
         );
