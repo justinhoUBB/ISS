@@ -14,6 +14,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.usersUL{
+  text-align: center;
+  list-style-type: none;
+  width: 1400px;
+}
+.usersUL li
+{
+  padding: 25px 30px;
+  float: left;
+  display: inline;
+}
+.rli
+{
+  float: left;
+
+}
 .conferenceList ul{
   list-style-type: none;
 }

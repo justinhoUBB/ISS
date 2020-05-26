@@ -7,19 +7,33 @@ export default class Register extends  Component {
         super(props);
 
         this.state = {
+            items:[],
             description: "",
             topics: "",
             starting_date:new Date(2018, 11, 24),
             paper_deadline:new Date(2018, 11, 24),
             bid_deadline:new Date(2018, 11, 24),
             number_of_rooms:0,
-            number_of_seats_per_room:0
+            number_of_seats_per_room:0,
+            isShow: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.register  = conference.addConference.bind(this);
         this.redirectToDashboard = this.redirectToDashboard.bind(this);
         this.logout = this.logout.bind(this);
+        this.createText = this.createText.bind(this);
+    }
+    componentDidMount() {
+        fetch('http://localhost:8080/api/users')
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    items: json,
+
+                })
+            });
     }
 
     handleChange(event){
@@ -43,6 +57,10 @@ export default class Register extends  Component {
 
     logout() {
         this.props.history.push('/logout');
+    }
+    createText(){
+        this.setState({isShow: true
+        });
     }
 
     render()  {
@@ -116,8 +134,33 @@ export default class Register extends  Component {
                            value={this.state.number_of_seats_per_room}
                            onChange={this.handleChange}
                            required/><br/><br/>
-
+                    {!this.state.isShow && <button onClick = {this.createText}> Add Members</button>}<br/>
                     <button type="submit"> Add Conference </button><br/>
+                    {this.state.isShow &&
+                    <ul className="usersUL" >
+                        {this.state.items.map(item=>(
+
+                            <li key={item.id}>
+
+
+                                <b>User</b> {item.first_name} {item.last_name}    <br/>
+                                <b>Email</b> {item.email}  <br/>
+                                <b>Affiliation</b> {item.affiliation}  <br/>
+
+                                <input type="checkbox" name="randi"/>  <label htmlFor="randi"> Add to members </label><br/><br/>
+
+
+
+
+
+                                <br/><br/>
+                            </li>
+
+
+
+                            )) }
+                    </ul>
+                    }
                     <Button className="buttonLogOut"  onClick={this.logout}> Log out </Button>
                 </form>
             </div>
