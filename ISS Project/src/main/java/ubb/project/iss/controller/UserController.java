@@ -58,6 +58,7 @@ public class UserController {
                 return AuthenticationResponse.builder()
                         .status("Success")
                         .userAccount(null)
+                        .userId(user.getId())
                         .role(user.is_committee_member())
                         .isError(false)
                         .build();

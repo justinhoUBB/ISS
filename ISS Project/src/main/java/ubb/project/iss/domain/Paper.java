@@ -17,6 +17,7 @@ public class Paper extends BaseEntity<Long>{
 
     private String title;
     private Long publisher_id;
+    private Long conference_id;
     private String list_of_authors;
     private String keywords;
     private boolean reviewed;

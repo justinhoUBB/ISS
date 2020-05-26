@@ -3,10 +3,12 @@ package ubb.project.iss.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ubb.project.iss.domain.ConferenceCommittee;
 import ubb.project.iss.domain.PaperSubmission;
 import ubb.project.iss.repository.PaperSubmissionRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,5 +57,10 @@ public class PaperSubmissionServiceImpl implements PaperSubmissionService {
         return (ArrayList<PaperSubmission>) paperSubmissionRepository.findAll().stream().
                 filter(paperSubmission -> paperSubmission.getConference_id() == conference_id).
                 collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PaperSubmission> getUserById(Long paper_id, PaperSubmission paperSubmission) {
+        return paperSubmissionRepository.findAll().stream().filter(n -> n.getPaper_id() == paper_id).collect(Collectors.toList());
     }
 }

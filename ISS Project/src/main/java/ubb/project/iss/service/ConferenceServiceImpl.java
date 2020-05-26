@@ -7,6 +7,7 @@ import ubb.project.iss.domain.Conference;
 import ubb.project.iss.domain.Supervisor;
 import ubb.project.iss.repository.ConferenceRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class ConferenceServiceImpl implements ConferenceService {
@@ -28,6 +29,14 @@ public class ConferenceServiceImpl implements ConferenceService {
         Conference update = conferenceRepository.findById(id).orElse(null);
         return update;
     }
+
+    @Override
+    public LocalDate getBidById(Long id) {
+        Conference update = conferenceRepository.findById(id).orElse(null);
+        return update.getBid_deadline();
+    }
+
+
 
     @Override
     @Transactional

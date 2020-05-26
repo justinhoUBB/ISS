@@ -3,6 +3,7 @@ package ubb.project.iss.service;
 import ubb.project.iss.domain.PaperSubmission;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface PaperSubmissionService {
     PaperSubmission addSubmission(PaperSubmission paper_submission);
@@ -12,4 +13,5 @@ public interface PaperSubmissionService {
     ArrayList<PaperSubmission> findAll();
     ArrayList<PaperSubmission> findByUserID(Long user_id);
     ArrayList<PaperSubmission> findByConferenceID(Long conference_id);
+    List<PaperSubmission> getUserById(Long paper_id, PaperSubmission paperSubmission);
 }

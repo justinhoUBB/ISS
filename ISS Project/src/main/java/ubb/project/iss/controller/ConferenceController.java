@@ -3,6 +3,7 @@ package ubb.project.iss.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ubb.project.iss.domain.Conference;
+import ubb.project.iss.response.GetBidResponse;
 import ubb.project.iss.service.ConferenceService;
 
 import java.util.List;
@@ -21,6 +22,12 @@ public class ConferenceController {
     @RequestMapping(value = "/conferences", method = RequestMethod.POST)
     Conference save(@RequestBody Conference conference) {
         return conferenceService.save(conference);
+    }
+
+    @RequestMapping(value = "/conferences_bid/{id}", method = RequestMethod.POST)
+    GetBidResponse getBidDeadlineById(@PathVariable Long id, Conference conference) {
+
+        return  GetBidResponse.builder().bid_deadline(conferenceService.getBidById(id)).conference(conference).build();
     }
 
     @RequestMapping(value = "/conferences/{id}", method = RequestMethod.GET)
