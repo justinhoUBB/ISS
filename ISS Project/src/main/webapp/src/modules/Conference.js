@@ -24,15 +24,18 @@ export default class Conference extends Component {
             conference_number_of_seats_per_room:this.props.location.state.conference_number_of_seats_per_room,
             list_of_authors:"",
             keywords:"",
+            is_user_committee_member:false,
             paper_deadline:"",
             bid_deadline:"",
             starting_date:"",
+            userID:0,
             content:null,
             isShow: false,
             isShowDeadline:false,
             isShowAttendance:false
 
         };
+
         this.handleSubmit2 = this.handleSubmit2.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -41,12 +44,20 @@ export default class Conference extends Component {
         this.submission  = paper.addPaperSubmission.bind(this);
         this.changeDeadlines = conference.updateConference.bind(this);
         this.attendConference = conference.attendConference.bind(this);
+        this.isPartOfCommittee = conference.checkConferenceCommittee.bind(this);
         this.handleAttend=this.handleAttend.bind(this);
         this.createText = this.createText.bind(this);
         this.createTextDeadline = this.createTextDeadline.bind(this);
         this.createTextAttendance = this.createTextAttendance.bind(this);
         this.logout = this.logout.bind(this);
         this.getCurrentDate =this.getCurrentDate.bind(this);
+        this.checkUserCM = this.checkUserCM.bind(this);
+    }
+
+    componentDidMount() {
+        this.checkUserCM();
+        setTimeout( () => {this.setState({ is_user_committee_member:localStorage.isUserPartOfCom});
+            localStorage.removeItem("isUserPartOfCom");},100);
     }
 
 
@@ -60,6 +71,10 @@ export default class Conference extends Component {
         return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
     }
 
+    checkUserCM(){
+        this.isPartOfCommittee();
+    }
+
     createTextAttendance(){
         this.setState({isShowAttendance: true
         });
@@ -68,6 +83,7 @@ export default class Conference extends Component {
     createTextDeadline(){
         this.setState({isShowDeadline: true
         });
+        this.checkUserCM();
     }
 
     createText(){
@@ -111,6 +127,8 @@ export default class Conference extends Component {
 
         })
     }
+
+
     changeFile(e)
     {
         this.readSingleFile(e);
@@ -122,7 +140,6 @@ export default class Conference extends Component {
         }
         let reader = new FileReader();
         reader.onload = (e) =>{
-            console.log("nuuu  "+e);
             let contents = e.target.result;
             this.displayContents(contents);
         };
@@ -160,9 +177,9 @@ export default class Conference extends Component {
                 {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) &&
                 <p> Paper submission deadline: {(this.props.location.state.conference_paper_deadline)}</p>}
 
-
+                {localStorage.isCommitteeMember === "true" && this.state.is_user_committee_member === "true"  && <p> You can't upload papers at one of the conferences you are part of the PC if you are from the steering committee.</p>}
                 {(Date.parse(this.getCurrentDate()) > Date.parse(this.props.location.state.conference_paper_deadline)) && <p> Papers can no longer be submitted at this date for this conference.</p>}
-                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) && !this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
+                {localStorage.isCommitteeMember === "false" || this.state.is_user_committee_member === "false" && (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) && !this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
 
                 {this.state.isShow &&
                 <form onSubmit={this.handleSubmit}>
@@ -200,7 +217,6 @@ export default class Conference extends Component {
                            placeholder="content"
                            value={this.state.content}
                            onChange={(e)=>{
-                               console.log("daaa   "+e.target);
                                this.handleChange(e);
                                this.changeFile(e);
                            }}
@@ -211,10 +227,9 @@ export default class Conference extends Component {
                             <pre id="file-content"style={{textAlign: 'left'}} ></pre>
 
 
-
                 </form>
                 }
-                { (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date)) && localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
+                { (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date)) && localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline &&  this.state.is_user_committee_member === "true"  && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
 
                 {this.state.isShowDeadline &&
                 <form onSubmit={this.handleSubmit2}>

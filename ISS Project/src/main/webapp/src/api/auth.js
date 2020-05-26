@@ -35,7 +35,10 @@ export function login() {
                     if (!result.data.isError) {
                         localStorage.setItem("loggedInUser", this.state.email);
                         localStorage.setItem("isCommitteeMember", result.data.role);
-                        localStorage.setItem("loggedInUserID", result.data.userId);
+                        localStorage.setItem("loggedInUserID", response.data.userId);
+                        console.log(response.data.userId);
+
+
 
                     }
 
@@ -51,6 +54,7 @@ export function logout() {
             localStorage.removeItem("loggedInUser");
             localStorage.removeItem("isCommitteeMember");
             localStorage.removeItem("loggedInUserID");
+            localStorage.removeItem("isUserPartOfCom");
             this.setState({ success: true });
         })
         .catch(function(err) {

@@ -11,12 +11,79 @@ function  addConference() {
         number_of_seats_per_room: this.state.number_of_seats_per_room
     }).then((response) => {
         if (!response.data.isError) {
-            this.props.history.push('/dashboard');
+            this.state.conference_id = response.data.id;
         }
 
     })
 
 }
+
+
+function  addConferenceCommitteeMember() {
+    axios.post('http://localhost:8080/api/conference_committee/', {
+        conference_id: +this.state.conference_id,
+        user_id: this.state.member_id
+    }).then((response) => {
+        if (!response.data.isError) {
+
+        }
+
+    })
+
+}
+
+function  addConferenceCommittee() {
+    axios.post('http://localhost:8080/api/conference_committee/', {
+        conference_id: +this.state.conference_id,
+        user_id: this.state.user_id
+    }).then((response) => {
+        if (!response.data.isError) {
+
+        }
+
+    })
+
+}
+
+function checkConferenceCommittee(){
+
+   axios.post('http://localhost:8080/api/conference_committee/'+ this.state.conference_id, {
+       user_id: localStorage.loggedInUserID,
+       conference_id: this.state.conference_id
+   }).then((response) =>{
+       console.log(response.data.status);
+       localStorage.setItem("isUserPartOfCom", response.data.status);
+    });
+
+
+}
+
+
+function checkConferenceCommitteePaper(conference_id){
+
+    axios.post('http://localhost:8080/api/conference_committee/'+ conference_id, {
+        user_id: localStorage.loggedInUserID,
+        conference_id: conference_id
+    }).then((response) =>{
+        localStorage.setItem("isUserPartOfCom", response.data.status);
+    });
+
+
+}
+
+function getBidDeadline(conference_id){
+
+    let deadline = "";
+    axios.post('http://localhost:8080/api/conferences_bid/'+ conference_id, {
+        conference_id: conference_id
+    }).then((response) =>{
+       setTimeout( () => {deadline = response.data.bid_deadline},2000);
+        return deadline;
+    });
+
+
+}
+
 function updateConference(){
     axios.put('http://localhost:8080/api/conferences/'+ this.state.conference_id, {
         description: "",
@@ -42,5 +109,7 @@ function attendConference(){
 }
 
 module.exports = {
-     addConference, updateConference,attendConference
+     addConference, updateConference,attendConference,
+    addConferenceCommittee,addConferenceCommitteeMember,checkConferenceCommittee,
+    checkConferenceCommitteePaper,getBidDeadline
 };
