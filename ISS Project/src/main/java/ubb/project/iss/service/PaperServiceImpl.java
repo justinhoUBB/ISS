@@ -10,6 +10,7 @@ import ubb.project.iss.repository.PaperRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PaperServiceImpl implements PaperService {
@@ -56,5 +57,11 @@ public class PaperServiceImpl implements PaperService {
     public Paper getById(Long id) {
         Paper update = paperRepository.findById(id).orElse(new Paper());
         return update;
+    }
+
+    @Override
+    public List<Paper> getPapersAtConference(Long id)
+    {
+        return paperRepository.findAll().stream().filter(paper -> paper.getConference_id() == id).collect(Collectors.toList());
     }
 }

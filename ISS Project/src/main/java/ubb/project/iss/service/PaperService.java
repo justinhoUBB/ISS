@@ -15,5 +15,5 @@ public interface PaperService {
     void delete(Long id);
     Paper getById(Long id);
     Paper paperReviewed(Long id);
-
+    List<Paper> getPapersAtConference(Long id);
 }
