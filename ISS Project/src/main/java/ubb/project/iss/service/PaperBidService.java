@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PaperBidService {
     List<PaperBid> getAll();
-    PaperBid save(PaperBid paperBid, Long conferenceID);
+    PaperBid save(PaperBid paperBid);
     PaperBid getById(Long id);
     void remove(PaperBid bid);
 }

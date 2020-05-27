@@ -31,13 +31,13 @@ function  getCurrentDate(separator='-'){
     return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
 }
 function  addPaperBid(paper_id) {
-    axios.post('http://localhost:8080/api/papers_bid/', {
+    axios.post('http://localhost:8080/api/paper_bids/', {
         bid_date: getCurrentDate('-'),
         bid_value: this.state.bid_value,
         justification: this.state.justification,
         member_id: localStorage.loggedInUserID,
         paper_id: paper_id
-    });
+    }).then(r => console.log(r));
 }
 
 function checkPaperSubmission(id){

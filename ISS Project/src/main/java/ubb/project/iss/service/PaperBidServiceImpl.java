@@ -28,14 +28,8 @@ public class PaperBidServiceImpl implements PaperBidService {
     }
 
     @Override
-    public PaperBid save(PaperBid paperBid, Long conferenceID) {
-        LocalDate bidDate = paperBid.getBid_date();
-        Conference conference = conferenceService.getById(conferenceID);
-        LocalDate deadline = conference.getBid_deadline();
-        if (bidDate.isBefore(deadline)) {
-            return paperBidRepository.save(paperBid);
-        }
-        return null;
+    public PaperBid save(PaperBid paperBid) {
+        return paperBidRepository.save(paperBid);
     }
 
     @Override

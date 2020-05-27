@@ -47,4 +47,11 @@ public class ConferenceServiceImpl implements ConferenceService {
         oldConference.setStarting_date(conference.getStarting_date());
         return oldConference;
     }
+
+    @Override
+    @Transactional
+    public void settleBids(Long id) {
+        Conference oldConference = conferenceRepository.findById(id).get();
+        oldConference.setWere_bids_settled(true);
+    }
 }

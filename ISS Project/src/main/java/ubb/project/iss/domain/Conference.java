@@ -22,5 +22,6 @@ public class Conference extends BaseEntity<Long>
     private LocalDate bid_deadline;
     private int number_of_rooms;
     private int number_of_seats_per_room;
+    private boolean were_bids_settled;
 }
 

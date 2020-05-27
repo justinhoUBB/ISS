@@ -31,4 +31,6 @@ public class PaperReviewController {
     @RequestMapping(value ="/review_result/", method = RequestMethod.POST)
     Boolean checkReview(){return paperReviewService.checkIfApproved();}
 
+    @RequestMapping(value="/do_reviews/{id}", method = RequestMethod.POST)
+    void doReviews(@PathVariable Long id){ paperReviewService.assignPapers(id); }
 }

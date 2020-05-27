@@ -19,8 +19,8 @@ public class PaperBidController {
     }
 
     @RequestMapping(value = "/paper_bids", method = RequestMethod.POST)
-    PaperBid save(@RequestBody PaperBid paperBid, long conferenceID) {
-        return paperBidService.save(paperBid, conferenceID);
+    void save(@RequestBody PaperBid paperBid) {
+        paperBidService.save(paperBid);
     }
 
     @RequestMapping(value = "/paper_bids/{id}", method = RequestMethod.GET)

@@ -33,7 +33,8 @@ export default class CommitteeDashboard extends Component{
             bidjust:"",
             bidval:-2,
             bidpaperid:0,
-            bidconfid:0
+            bidconfid:0,
+            conferences:[]
         };
         this.logout = this.logout.bind(this);
         this.checkPaper = paper.checkPaperSubmission.bind(this);
@@ -50,6 +51,8 @@ export default class CommitteeDashboard extends Component{
         this.saveSelect = this.saveSelect.bind(this);
         this.handleSubmit2 = this.handleSubmit2.bind(this);
         this.addBid = bid.add_bid.bind(this);
+        this.settleBids = conference.settleBids.bind(this);
+        this.doReviews = conference.doReviews.bind(this);
     }
 
     componentDidMount() {
@@ -58,8 +61,7 @@ export default class CommitteeDashboard extends Component{
             .then(json => {
                 this.setState({
                     isLoaded: true,
-                    items: json,
-
+                    items: json
                 })
             });
         fetch('http://localhost:8080/api/users')
@@ -67,13 +69,28 @@ export default class CommitteeDashboard extends Component{
             .then(json => {
                 this.setState({
                     isLoaded: true,
-                    users: json,
-
+                    users: json
                 })
-            })
+            });
+        fetch('http://localhost:8080/api/conferences')
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    conferences: json
+                });
+                this.state.conferences.map(conference => {
+                    if(Date.parse(conference.bid_deadline) < Date.parse(this.getCurrentDate())) {
+                        console.log(conference.id);
+                        this.settleBids(conference.id);
+                        this.doReviews(conference.id);
+                    }
+                });
+            });
     }
-    handleSubmitBid(event,paper_id){
-        event.preventDefault();
+    handleSubmitBid(paper_id){
+        //event.preventDefault();
+        console.log(paper_id);
         this.addPaperBid(paper_id);
     }
 
@@ -184,7 +201,7 @@ export default class CommitteeDashboard extends Component{
                          <li key={item.id}>
 
                             {item.title}  Paper  <br/>
-                            <p>Starting date: </p>
+                            <p>Starting date:  { this.startingDate(item.conference_id) } { localStorage.getItem("starting_date_" + item.conference_id) } </p>
                              <p>Bid deadline:  { this.bidDeadline(item.conference_id) } { localStorage.getItem("bid_deadline_" + item.conference_id) } </p>
                             Keywords: {item.keywords}<br/>
                             Content:   <Link to={{ activeClassName:'idk', pathname: `/papers/${item.id}`, state: {
@@ -196,7 +213,7 @@ export default class CommitteeDashboard extends Component{
 
                              <br/><br/>
                              {/*} <Button onClick={()=>this.openFile(item.content)}>View the paper</Button> {*/}
-                             { Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
+                             {/* Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
 
                                  <form onSubmit={() => this.handleSubmit2(item.id, item.conference_id)}>
                                  <input type="text"
@@ -214,9 +231,8 @@ export default class CommitteeDashboard extends Component{
                                  <button type="submit">Leave bid</button>
                                      <br/><br/><br/>
                                  </form>
-                             }
-                             { //Date.parse(this.getCurrentDate()) > Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
-                               //Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("starting_date_" + item.conference_id)) &&
+                             */}
+                             { Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
                                  <form onSubmit={() => this.handleSubmitBid(item.id)}>
                                      <input type="text"
                                             name="justification"
@@ -228,7 +244,7 @@ export default class CommitteeDashboard extends Component{
                                             name="randi"/> <label htmlFor="randi"> Reject </label>
                                      <input type="checkbox" onChange={this.handleReject} value={this.state.bid_value}
                                             name="randi2"/> <label htmlFor="randi2"> Accept </label>
-
+                                     {  }
                                      {this.state.hasToReview &&
                                      <Button onClick={() => this.reviewPaperWithId(item.id, item.conference_id)}> Review
                                          paper</Button>}

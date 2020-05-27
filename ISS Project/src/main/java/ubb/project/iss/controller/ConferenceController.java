@@ -39,4 +39,9 @@ public class ConferenceController {
     Conference update(@PathVariable Long id,@RequestBody Conference conference) {
         return conferenceService.update(conference,id);
     }
+    
+    @RequestMapping(value = "/settle_bid/{id}", method = RequestMethod.PUT)
+    void settleBid(@PathVariable Long id) {
+        conferenceService.settleBids(id);
+    }
 }

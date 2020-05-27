@@ -12,4 +12,5 @@ public interface ConferenceService {
     Conference getById(Long id);
     Conference update(Conference conference,Long id);
     LocalDate getBidById(Long id);
+    void settleBids(Long id);
 }

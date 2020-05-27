@@ -2,6 +2,7 @@ package ubb.project.iss.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ubb.project.iss.domain.Paper;
 import ubb.project.iss.domain.PaperBid;
 import ubb.project.iss.domain.PaperReview;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.stream.Collectors;
 import javax.mail.*;
 import javax.mail.internet.*;
 
@@ -89,9 +91,12 @@ public class PaperReviewServiceImpl implements PaperReviewService {
     }
 
     @Override
-    public void assignPapers() {
-        List<PaperBid> paperBids = paperBidService.getAll();
-        List<Paper> papers = paperRepository.findAll();
+    public void assignPapers(Long conferenceID) {
+        List<PaperBid> paperBids = paperBidService.getAll().stream().filter(bid -> {
+            Paper paper = paperRepository.findById(bid.getPaper_id()).get();
+            return conferenceID.equals(paper.getConference_id());
+        }).collect(Collectors.toList());
+        List<Paper> papers = paperRepository.findAll().stream().filter(paper -> paper.getConference_id().equals(conferenceID)).collect(Collectors.toList());
         List<Long> paperIDs = new ArrayList<Long>();
         List<Long> bidIDs = new ArrayList<Long>();
 
@@ -151,6 +156,7 @@ public class PaperReviewServiceImpl implements PaperReviewService {
 
     //folosim asta pentru "add", deoarece am folosit save-ul ca sa asignam paper-urile la evaluatori cu imiplicit remark -1
     @Override
+    @Transactional
     public void update(Long paperReviewID, Integer newRemark, String newRecommendation) {
         this.getById(paperReviewID).setRemark(newRemark);
         this.getById(paperReviewID).setRecommendations(newRecommendation);
