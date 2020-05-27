@@ -44,9 +44,7 @@ export default class Dashboard extends Component{
                 {localStorage.isCommitteeMember === "true" && <a href="http://localhost:3000/comdashboard"> Committee Dashboard </a>}
                <br/>
                <br/>
-
-
-                <ul>
+               <ul>
                     {items.map(item=>(
                         <li key={item.id}>
 

@@ -24,7 +24,7 @@ public class ConferenceController {
         return conferenceService.save(conference);
     }
 
-    @RequestMapping(value = "/conferences_bid/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/conferences_bid/{id}", method = RequestMethod.GET)
     GetBidResponse getBidDeadlineById(@PathVariable Long id, Conference conference) {
 
         return  GetBidResponse.builder().bid_deadline(conferenceService.getBidById(id)).conference(conference).build();

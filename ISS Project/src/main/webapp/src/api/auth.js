@@ -1,10 +1,6 @@
 import React from "react";
 const axios = require('axios');
 
-
-
-
-
 export function  register() {
     axios.post('http://localhost:8080/api/users/', {
         affiliation: this.state.affiliation,

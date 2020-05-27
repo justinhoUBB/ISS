@@ -72,16 +72,19 @@ function checkConferenceCommitteePaper(conference_id){
 }
 
 function getBidDeadline(conference_id){
-
-    let deadline = "";
-    axios.post('http://localhost:8080/api/conferences_bid/'+ conference_id, {
+    axios.get('http://localhost:8080/api/conferences_bid/'+ conference_id, {
         conference_id: conference_id
-    }).then((response) =>{
-       setTimeout( () => {deadline = response.data.bid_deadline},2000);
-        return deadline;
+    }).then((response) => {
+       localStorage.setItem("bid_deadline_" + conference_id, response.data.bid_deadline);
     });
+}
 
-
+function getStartingDate(conference_id){
+    axios.get('http://localhost:8080/api/conferences_bid/'+ conference_id, {
+        conference_id: conference_id
+    }).then((response) => {
+        localStorage.setItem("starting_date_" + conference_id, response.data.starting_date);
+    });
 }
 
 function updateConference(){
@@ -111,5 +114,5 @@ function attendConference(){
 module.exports = {
      addConference, updateConference,attendConference,
     addConferenceCommittee,addConferenceCommitteeMember,checkConferenceCommittee,
-    checkConferenceCommitteePaper,getBidDeadline
+    checkConferenceCommitteePaper,getBidDeadline, getStartingDate
 };

@@ -38,12 +38,7 @@ function  addPaperBid(paper_id) {
         member_id: localStorage.loggedInUserID,
         paper_id: paper_id
     });
-
 }
-
-
-
-
 
 function checkPaperSubmission(id){
 

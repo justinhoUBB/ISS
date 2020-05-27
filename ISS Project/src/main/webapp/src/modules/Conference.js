@@ -32,8 +32,9 @@ export default class Conference extends Component {
             content:null,
             isShow: false,
             isShowDeadline:false,
-            isShowAttendance:false
-
+            isShowAttendance:false,
+            papers: [],
+            isLoaded : false
         };
 
         this.handleSubmit2 = this.handleSubmit2.bind(this);
@@ -58,6 +59,16 @@ export default class Conference extends Component {
         this.checkUserCM();
         setTimeout( () => {this.setState({ is_user_committee_member:localStorage.isUserPartOfCom});
             localStorage.removeItem("isUserPartOfCom");},100);
+        fetch('http://localhost:8080/api/papersconf/' + this.state.conference_id)
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    papers: json,
+                });
+                console.log(this.state.papers);
+            }
+            )
     }
 
 
@@ -152,10 +163,8 @@ export default class Conference extends Component {
         element.textContent = contents;
     }
 
-
-
     render(){
-
+        const {papers} = this.state
         return (
 
             <div  id="conference" className ="conferenceList">
@@ -174,6 +183,19 @@ export default class Conference extends Component {
                 <p> Number of seats: {(this.props.location.state.conference_number_of_rooms * this.props.location.state.conference_number_of_seats_per_room)}</p>
                 <p> Starting date: {(this.props.location.state.conference_starting_date)}</p>
 
+                <h3>Papers:</h3>
+                <ul>
+                    {papers.map(paper =>(
+                        <li key={paper.id}>
+                            <p>Paper title: {paper.title}</p>
+                            <p>List of authors: {paper.list_of_authors}</p>
+                            <p>Keywords: {paper.keywords}</p>
+                            <br/><br/><br/>
+                        </li>
+                        ))}
+                </ul>
+                <ul>
+                </ul>
                 {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) &&
                 <p> Paper submission deadline: {(this.props.location.state.conference_paper_deadline)}</p>}
 
@@ -190,8 +212,6 @@ export default class Conference extends Component {
                            value={this.state.title}
                            onChange={this.handleChange}
                            required/><br/><br/>
-
-
 
                     List of authors:<br/>
                     <input type ="text"
@@ -241,8 +261,6 @@ export default class Conference extends Component {
                            value={this.state.bid_deadline}
                            onChange={this.handleChange}
                            required/><br/><br/>
-
-
 
                     Paper submission deadline:<br/>
                     <input type ="date"

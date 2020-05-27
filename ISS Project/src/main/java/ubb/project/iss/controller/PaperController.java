@@ -33,6 +33,6 @@ public class PaperController {
         return paperService.paperReviewed(id);
         }
 
-    @RequestMapping(value="/papers/{id}", method = RequestMethod.GET)
+    @RequestMapping(value="/papersconf/{id}", method = RequestMethod.GET)
     List<Paper> getPapersAtConference(@PathVariable Long id) { return paperService.getPapersAtConference(id); }
 }
