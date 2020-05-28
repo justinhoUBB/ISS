@@ -58,6 +58,7 @@ export default class Conference extends Component {
         this.getCurrentDate =this.getCurrentDate.bind(this);
         this.checkUserCM = this.checkUserCM.bind(this);
         this.addListener=listener.addListener.bind(this);
+        this.createSections=this.createSections.bind(this);
     }
 
     handleListenerMember() {
@@ -357,6 +358,14 @@ export default class Conference extends Component {
             </div>
         );
 
+    }
+    createSections() {
+        this.state.sections=this.props.location.state.conference_topics.split(",");
+        if(this.state.checkboxes.length===0)
+        {
+            this.state.checkboxes=new Array(this.state.sections.length).fill().map((_, i) => !i);
+        }
+        return true;
     }
 
 };
