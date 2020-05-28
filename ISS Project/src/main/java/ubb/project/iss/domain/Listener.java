@@ -1,5 +1,4 @@
 package ubb.project.iss.domain;
-
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -11,8 +10,8 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Builder
-public class Section extends BaseEntity<Long> {
-    private long supervisor_id;
+public class Listener extends BaseEntity<Long> {
+    private long member_id;
     private long conference_id;
-    private String topics;
+    private String section_name;
 }

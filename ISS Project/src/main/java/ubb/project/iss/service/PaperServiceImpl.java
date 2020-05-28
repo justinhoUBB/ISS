@@ -27,14 +27,14 @@ public class PaperServiceImpl implements PaperService {
     @Override
     public Paper save(Paper entity) {
         return paperRepository.save(entity);
-   }
+    }
 
-   @Override
-   public Paper paperReviewed(Long id){
+    @Override
+    public Paper paperReviewed(Long id){
         Paper oldPaper = paperRepository.findById(id).orElse(null);
         oldPaper.setReviewed(true);
         return oldPaper;
-   }
+    }
 
     @Override
     @Transactional

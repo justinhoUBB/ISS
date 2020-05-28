@@ -1,11 +1,13 @@
 import React,{Component} from 'react';
 import '../App.css';
 import {Table, Button} from 'reactstrap';
+import $ from "jquery";
 import ApiService from '../api/file'
 import { Link } from 'react-router-dom';
 const paper = require('../api/paper');
 const auth = require('../api/auth');
 const conference = require('../api/conference')
+const listener = require('../api/listener');
 
 export default class Conference extends Component {
 
@@ -34,7 +36,9 @@ export default class Conference extends Component {
             isShowDeadline:false,
             isShowAttendance:false,
             papers: [],
-            isLoaded : false
+            isLoaded : false,
+            checkboxes: [],
+            OneTopic:"",
         };
 
         this.handleSubmit2 = this.handleSubmit2.bind(this);
@@ -53,6 +57,20 @@ export default class Conference extends Component {
         this.logout = this.logout.bind(this);
         this.getCurrentDate =this.getCurrentDate.bind(this);
         this.checkUserCM = this.checkUserCM.bind(this);
+        this.addListener=listener.addListener.bind(this);
+    }
+
+    handleListenerMember() {
+        let index=this.state.checkboxes.indexOf(true);
+        this.state.OneTopic=this.state.sections[index];
+        this.addListener();
+    }
+    onChangeBoxes(e, changedIndex) {
+        const { checked } = e.target;
+
+        this.setState(state => ({
+            checkboxes: state.checkboxes.map((_, i) => i === changedIndex ? checked : false),
+        }));
     }
 
     componentDidMount() {
@@ -285,12 +303,38 @@ export default class Conference extends Component {
                 </form>
                 }
 
-                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date))  &&!this.state.isShowAttendance&& <form onSubmit={this.handleAttend}>
+                {(Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date))  &&!this.state.isShowAttendance&&
+                <form onSubmit={this.handleAttend}>
                     <br/>
-                <button type="submit" onClick={this.createTextAttendance}> Attend Conference </button><br/>
+                    <button type="submit" onClick={this.createTextAttendance}> Attend Conference </button><br/>
                 </form>}
                 {
-                    this.state.isShowAttendance && <div>
+                    this.state.isShowAttendance && this.createSections()&& <div>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.6.3/umd/react.production.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.6.3/umd/react-dom.production.min.js"></script>
+
+
+                        </script>
+                        <p>Choose a section from the conference</p>
+
+
+                        <ul>
+                            {this.state.checkboxes.map((item,i)=>(
+                                <li>
+
+
+
+                                    <input key={i}
+                                           type="checkbox"
+                                           checked={item}
+                                           onChange={e => this.onChangeBoxes(e, i)}/>{this.state.sections[i]}
+
+                                </li>
+                            ))}
+                            <button onClick={()=>this.handleListenerMember()} >Attend</button>
+                        </ul>
+
                         <p> Your attendance has been registered !</p>
                         <p> Thank you for choosing to attend {(this.props.location.state.conference_topics)} Conference .</p>
                     </div>
