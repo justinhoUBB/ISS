@@ -65,15 +65,14 @@ export default class Register extends  Component {
             member_id: id,
             submittedMember:false
         });
-        console.log("loogg"+this.state.member_id)
+
 
     }
     handleChangeSectionMember(id,topic) {
-        setTimeout(()=>{this.setState({
+        this.setState({
                       member_id: id,
                       Onetopic:topic
-                  });},200);
-        setTimeout(    console.log("id" + this.state.member_id+"    topic "+this.state.Onetopic+"  conf_idd "+this.state.conference_id),2000);
+                  });
 
 }
     handleSubmitMember(event){
@@ -139,7 +138,7 @@ export default class Register extends  Component {
                            required/><br/><br/>
 
 
-                    {/*       Starting date:<br/>
+                           Starting date:<br/>
                     <input type ="date"
                            name="starting_date"
                            placeholder ="starting date"
@@ -171,7 +170,7 @@ export default class Register extends  Component {
                            placeholder="Nr of rooms"
                            value={this.state.is_committee_member}
                            onChange={this.handleChange}
-                           required/><br/>*/}
+                           required/><br/>
 
 
                     <br/>
@@ -223,7 +222,7 @@ export default class Register extends  Component {
                     <ul style={{ listStyleType: "none"}}>
                     <li key={item}>
                         <div style={{clear:"left"}}>
-                          <h2>  For the section {item} we have the following supervisors </h2>
+                            <h2>  Choose a supervisor for the section {item}  </h2>
                         <ul className="usersUL" >
                             {this.state.submittedMember && <p> Committee member added successfully !</p>}
                             {this.state.items.map((user)=>(
