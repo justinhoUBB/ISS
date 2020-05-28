@@ -1,12 +1,15 @@
 import React, {Component} from "react";
 import {Button} from 'reactstrap';
 const conference = require('../api/conference');
+const section = require('../api/section');
 
 export default class Register extends  Component {
+
     constructor(props) {
         super(props);
 
         this.state = {
+            sections:[],
             items:[],
             user_id: localStorage.loggedInUserID,
             member_id:0,
@@ -19,19 +22,24 @@ export default class Register extends  Component {
             number_of_seats_per_room:0,
             submitted:false,
             isShow: false,
-            submittedMember:false
+            submittedMember:false,
+            conference_id:0,
+            age:'',
+            Onetopic:""
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitMember = this.handleSubmitMember.bind(this);
-
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeMember = this.handleChangeMember.bind(this);
+        this.handleChangeSectionMember=this.handleChangeSectionMember.bind(this);
+        this.handleSubmitSection=this.handleSubmitSection.bind(this);
         this.register  = conference.addConference.bind(this);
         this.registerCommittee = conference.addConferenceCommittee.bind(this);
         this.registerCommitteeMember = conference.addConferenceCommitteeMember.bind(this);
         this.redirectToDashboard = this.redirectToDashboard.bind(this);
         this.logout = this.logout.bind(this);
         this.createText = this.createText.bind(this);
+        this.registerSection=section.addSection.bind(this);
     }
     componentDidMount() {
         fetch('http://localhost:8080/api/users')
@@ -57,13 +65,27 @@ export default class Register extends  Component {
             member_id: id,
             submittedMember:false
         });
+        console.log("loogg"+this.state.member_id)
 
     }
+    handleChangeSectionMember(id,topic) {
+        setTimeout(()=>{this.setState({
+                      member_id: id,
+                      Onetopic:topic
+                  });},200);
+        setTimeout(    console.log("id" + this.state.member_id+"    topic "+this.state.Onetopic+"  conf_idd "+this.state.conference_id),2000);
+
+}
     handleSubmitMember(event){
         event.preventDefault();
         this.setState({submittedMember:true});
         this.registerCommitteeMember();
 
+    }
+    handleSubmitSection(event){
+        event.preventDefault();
+        //this.setState({submittedMember:true});
+        this.registerSection();
 
     }
 
@@ -117,7 +139,7 @@ export default class Register extends  Component {
                            required/><br/><br/>
 
 
-                           Starting date:<br/>
+                    {/*       Starting date:<br/>
                     <input type ="date"
                            name="starting_date"
                            placeholder ="starting date"
@@ -149,7 +171,7 @@ export default class Register extends  Component {
                            placeholder="Nr of rooms"
                            value={this.state.is_committee_member}
                            onChange={this.handleChange}
-                           required/><br/>
+                           required/><br/>*/}
 
 
                     <br/>
@@ -162,6 +184,7 @@ export default class Register extends  Component {
                            required/><br/><br/>
                     <button type="submit"> Add Conference </button><br/> </form>}
                     {this.state.submitted &&
+                        <div >
                     <ul className="usersUL" >
                         <h2> Please choose your conference's committee members</h2><br/>
                         {this.state.submittedMember && <p> Committee member added successfully !</p>}
@@ -184,13 +207,64 @@ export default class Register extends  Component {
                             </li>
 
                             )) }
+
                     </ul>
+                        </div>
+
 
                     }
-                    <Button className="buttonLogOut"  onClick={this.logout}> Log out </Button>
+            <br/>
+            <p/>
+           <div className="sectionDiv">
+
+                {this.state.submitted  && this.createSections()  &&
+
+                <div>{this.state.sections.map(item=>(
+                    <ul style={{ listStyleType: "none"}}>
+                    <li key={item}>
+                        <div style={{clear:"left"}}>
+                          <h2>  For the section {item} we have the following supervisors </h2>
+                        <ul className="usersUL" >
+                            {this.state.submittedMember && <p> Committee member added successfully !</p>}
+                            {this.state.items.map((user)=>(
+
+                                <li key={user.id}>
+
+                                    <form onSubmit={this.handleSubmitSection}>
+                                        <b>User</b> {user.first_name} {user.last_name}    <br/>
+                                        <b>Email</b> {user.email}  <br/>
+                                        <b>Affiliation</b> {user.affiliation}  <br/>
+
+                                        <input type="checkbox" onChange={() => this.handleChangeSectionMember(user.id,item)}  value = {this.state.member_id} name={"randi" + item.id}/> <label htmlFor="randi"> Add to members </label><br/><br/>
+                                        <button type="submit"> Add  </button>
+
+
+                                    </form>
+
+                                    <br/><br/>
+                                </li>
+
+                            )) }
+
+                        </ul>
+                        </div>
+                    </li>
+                    </ul>
+                    )
+                )}</div>
+
+                }
+           </div>
+
             </div>
 
         );
     }
 
+
+    createSections() {
+            this.state.sections=this.state.topics.split(",");
+
+            return true;
+    }
 }

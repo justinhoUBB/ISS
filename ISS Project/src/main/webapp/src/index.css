@@ -33,6 +33,9 @@ code {
 .conferenceList ul{
   list-style-type: none;
 }
+.sectionDiv{
+  clear:left;
+}
 
 .login a, .conference a, .conferenceList a{
   text-decoration: none;

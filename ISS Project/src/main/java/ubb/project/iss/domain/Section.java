@@ -14,4 +14,5 @@ import javax.persistence.Entity;
 public class Section extends BaseEntity<Long> {
     private long supervisor_id;
     private long conference_id;
+    private String topics;
 }

@@ -10,5 +10,5 @@ public interface SectionService {
     Section getById(Long id);
     List<Section> getAllByConferenceID(Long id);
     void createRepartitions(Long conference_id);
-    void createSections(Long conference_id);
+    void createSections(Long conference_id,String topics);
 }

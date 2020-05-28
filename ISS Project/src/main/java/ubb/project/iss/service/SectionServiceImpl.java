@@ -45,14 +45,14 @@ public class SectionServiceImpl implements SectionService {
         return sectionRepository.findAll().stream().filter(section -> section.getConference_id() == id).collect(Collectors.toList());
     }
 
-    public void createSections(Long conference_id)
+    public void createSections(Long conference_id, String topics)
     {
         Conference conference = conferenceRepository.findById(conference_id).get();
         int numberOfRooms = conference.getNumber_of_rooms();
         ArrayList<Supervisor> supervisors = (ArrayList<Supervisor>) supervisorService.getByConferenceID(conference_id);
         for(int i = 0; i < numberOfRooms; i++)
         {
-            sectionRepository.save(new Section(supervisors.get(i).getId(), conference_id));
+            sectionRepository.save(new Section(supervisors.get(i).getId(), conference_id,topics));//topics ii full string, am facut functie in front
         }
     }
 
