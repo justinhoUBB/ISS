@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color:#333;
+  text-align: center;
+  color: #DCDCDC;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+.usersUL{
+  text-align: center;
+  list-style-type: none;
+  width: 1400px;
+}
+.usersUL li
+{
+  padding: 25px 30px;
+  float: left;
+  display: inline;
+}
+.rli
+{
+  float: left;
+
+}
+.conferenceList ul{
+  list-style-type: none;
+}
+.sectionDiv{
+  clear:left;
+}
+
+.login a, .conference a, .conferenceList a{
+  text-decoration: none;
+
+  color:#808080;
+  font-size:20px;
+  font-weight: 400;
+}
+
+.login a:active,.conference a:active, .conferenceList a:active{
+  text-decoration: none;
+}
+
+.login a:hover,.conference a:hover,  .conferenceList a:hover{
+  text-decoration: none;
+  font-size:22px;
+  color:#DCDCDC;
+
+}
+.buttonLogOut {
+  width: 100px;
+  height: 30px;
+  background-color: #1a1a1a;
+  border: none;
+  font-size: 10px;
+  font-weight: 300;
+  color: #FFF;
+  outline: none;
+  text-transform: uppercase;
+  float:right;
+  margin-right:250px;
+  margin-bottom:200px;
+}
+
+.conferenceList button{
+  margin-left: 10px;
+
+}
