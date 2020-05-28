@@ -52,7 +52,8 @@ export default class Dashboard extends Component{
 
                                 {item.description}<br/>
                                 Starting date: {item.starting_date}<br/>
-                                Number of seats: {item.number_of_seats_per_room * item.number_of_rooms}
+                            {console.log(item.number_of_rooms)}
+                                Number of seats: {+item.number_of_seats_per_room * +item.number_of_rooms}
                         <br/>
 
                             <Link to={{ activeClassName:'idk', pathname: `/conferences/${item.id}`, state: {

@@ -4,6 +4,7 @@ import {Table, Button} from 'reactstrap';
 import $ from "jquery";
 import ApiService from '../api/file'
 import { Link } from 'react-router-dom';
+import { useAlert } from 'react-alert'
 const paper = require('../api/paper');
 const auth = require('../api/auth');
 const conference = require('../api/conference')
@@ -16,6 +17,7 @@ export default class Conference extends Component {
     constructor(props) {
         super(props);
         this.state= {
+
             title:"",
             user_id:localStorage.loggedInUserID,
             publisher_id:localStorage.loggedInUserID,
@@ -39,6 +41,7 @@ export default class Conference extends Component {
             isLoaded : false,
             checkboxes: [],
             OneTopic:"",
+            isShowForSpeaker:false,
         };
 
         this.handleSubmit2 = this.handleSubmit2.bind(this);
@@ -54,6 +57,7 @@ export default class Conference extends Component {
         this.createText = this.createText.bind(this);
         this.createTextDeadline = this.createTextDeadline.bind(this);
         this.createTextAttendance = this.createTextAttendance.bind(this);
+        this.createTextSpeaker=this.createTextSpeaker.bind(this);
         this.logout = this.logout.bind(this);
         this.getCurrentDate =this.getCurrentDate.bind(this);
         this.checkUserCM = this.checkUserCM.bind(this);
@@ -107,6 +111,10 @@ export default class Conference extends Component {
 
     createTextAttendance(){
         this.setState({isShowAttendance: true
+        });
+    }
+    createTextSpeaker(){
+        this.setState({isShowForSpeaker: true
         });
     }
 
@@ -220,7 +228,7 @@ export default class Conference extends Component {
 
                 {localStorage.isCommitteeMember === "true" && this.state.is_user_committee_member === "true"  && <p> You can't upload papers at one of the conferences you are part of the PC if you are from the steering committee.</p>}
                 {(Date.parse(this.getCurrentDate()) > Date.parse(this.props.location.state.conference_paper_deadline)) && <p> Papers can no longer be submitted at this date for this conference.</p>}
-                {localStorage.isCommitteeMember === "false" || this.state.is_user_committee_member === "false" && (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) && !this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
+                {(localStorage.isCommitteeMember === "false" || this.state.is_user_committee_member === "false") && (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_paper_deadline)) && !this.state.isShow && <button onClick = {this.createText}> Submit Paper</button>}
 
                 {this.state.isShow &&
                 <form onSubmit={this.handleSubmit}>
@@ -269,7 +277,13 @@ export default class Conference extends Component {
                 </form>
                 }
                 { (Date.parse(this.getCurrentDate()) <= Date.parse(this.props.location.state.conference_starting_date)) && localStorage.isCommitteeMember === "true" && !this.state.isShowDeadline &&  this.state.is_user_committee_member === "true"  && <button onClick = {this.createTextDeadline}> Change Deadlines</button>}
-
+                    <br/><br/><button onClick = {this.createTextSpeaker}>Add Presentation</button>
+                {this.state.isShowForSpeaker && <h2>
+                    <h5>Hello speaker</h5>
+                    <h5>here you can insert your presentation</h5>
+                    <input type ="file" placeholder="Prezentation"/>
+                    <button onClick={this.callAlert}>Upload</button>
+                </h2>}
                 {this.state.isShowDeadline &&
                 <form onSubmit={this.handleSubmit2}>
                     <br/>
@@ -368,6 +382,10 @@ export default class Conference extends Component {
         return true;
     }
 
+    callAlert() {
+        const alert = useAlert();
+        alert.show("Uploaded");
+    }
 };
 
 

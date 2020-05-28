@@ -25,7 +25,8 @@ export default class Register extends  Component {
             submittedMember:false,
             conference_id:0,
             age:'',
-            Onetopic:""
+            Onetopic:"",
+
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleSubmitMember = this.handleSubmitMember.bind(this);
@@ -57,6 +58,13 @@ export default class Register extends  Component {
         this.setState({
             [event.target.name]: event.target.value
         });
+
+    }
+    handleChange2(event){
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+        this.state.number_of_rooms=this.state.topics.split(",").length;
 
     }
 
@@ -129,12 +137,15 @@ export default class Register extends  Component {
                            onChange={this.handleChange}
                            required/><br/><br/>
 
-                    Topics: <br/>
+                    Topics <br/> (separate each one by comma) <br/>
                     <input type ="text"
                            name = "topics"
                            placeholder="topics"
                            value={this.state.topics}
-                           onChange={this.handleChange}
+                           onChange={(e)=> {
+                               this.handleChange(e);
+                               this.handleChange2(e);
+                           }}
                            required/><br/><br/>
 
 
@@ -164,15 +175,8 @@ export default class Register extends  Component {
                            required/><br/>
 
                     <br/>
-                    Number of rooms:<br/>
-                    <input type ="integer"
-                           name = "number_of_rooms"
-                           placeholder="Nr of rooms"
-                           value={this.state.is_committee_member}
-                           onChange={this.handleChange}
-                           required/><br/>
-
-
+                    Number of rooms: {this.state.topics.split(",").length}
+                    <br/>
                     <br/>
                     Number of seats per room:<br/>
                     <input type ="integer"
@@ -254,9 +258,9 @@ export default class Register extends  Component {
 
                     }
                 </div>
-
+                <button onClick={()=>this.props.history.push('/dashboard')}>Save all</button>
+                <br/><br/><br/>
             </div>
-
         );
     }
 
