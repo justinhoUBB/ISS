@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-public class GetBidResponse {
+public class GetStartResponse {
     private Conference conference;
-    private LocalDate bid_deadline;
+    private LocalDate starting_date;
 }

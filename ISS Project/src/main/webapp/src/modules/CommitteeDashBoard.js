@@ -30,10 +30,11 @@ export default class CommitteeDashboard extends Component{
             justification: "",
             is_user_committee_member:false,
             users:[],
-            bidjust:"",
-            bidval:-2,
-            bidpaperid:0,
-            bidconfid:0,
+            reviewjust:"",
+            reviewval:-2,
+            reviewpaperid:0,
+            reviewrec:"",
+            review:"",
             conferences:[]
         };
         this.logout = this.logout.bind(this);
@@ -49,10 +50,12 @@ export default class CommitteeDashboard extends Component{
         this.handleChange = this.handleChange.bind(this);
         this.getStartingDate = conference.getStartingDate.bind(this);
         this.saveSelect = this.saveSelect.bind(this);
-        this.handleSubmit2 = this.handleSubmit2.bind(this);
-        this.addBid = bid.add_bid.bind(this);
+        this.handleSubmitReview = this.handleSubmitReview.bind(this);
         this.settleBids = conference.settleBids.bind(this);
         this.doReviews = conference.doReviews.bind(this);
+        this.saveSelectReview = this.saveSelectReview.bind(this);
+        this.addReview = paper.addReview.bind(this);
+        this.wereBidsSettled = conference.areBidsSettled.bind(this);
     }
 
     componentDidMount() {
@@ -80,8 +83,8 @@ export default class CommitteeDashboard extends Component{
                     conferences: json
                 });
                 this.state.conferences.map(conference => {
-                    if(Date.parse(conference.bid_deadline) < Date.parse(this.getCurrentDate())) {
-                        console.log(conference.id);
+                    this.wereBidsSettled(conference.id);
+                    if(Date.parse(conference.bid_deadline) < Date.parse(this.getCurrentDate()) && localStorage.getItem("was_settled_" + conference.id) === "false") {
                         this.settleBids(conference.id);
                         this.doReviews(conference.id);
                     }
@@ -89,8 +92,6 @@ export default class CommitteeDashboard extends Component{
             });
     }
     handleSubmitBid(paper_id){
-        //event.preventDefault();
-        console.log(paper_id);
         this.addPaperBid(paper_id);
     }
 
@@ -135,10 +136,9 @@ export default class CommitteeDashboard extends Component{
         this.props.history.push('/logout');
     }
     reviewPaperWithId(id,conf_id){
-
         this.setState({showNo:false});
         this.userId=this.state.users.filter(item=>item.email===localStorage.loggedInUser).map(item=>item.id);
-       this.checkUserCM(conf_id);
+        this.checkUserCM(conf_id);
         setTimeout( () => {
             this.setState({is_user_committee_member: localStorage.isUserPartOfCom});
             localStorage.removeItem("isUserPartOfCom");
@@ -157,28 +157,43 @@ export default class CommitteeDashboard extends Component{
         }
 
         //bid
-    handleSubmit2(paper_id, conf_id) {
-        if(this.state.bid !== "") {
-            if(this.state.bid === "For") {
-                this.state.bidval = 1;
+    handleSubmitReview(paper_id, conf_id) {
+        if(this.state.review !== "") {
+            if(this.state.review === "Strong Accept") {
+                this.state.reviewval = 1;
             }
-            else if(this.state.bid === "Indifferent") {
-                this.state.bidval = 0;
+            else if(this.state.review === "Accept") {
+                this.state.reviewval = 2;
+            }
+            else if(this.state.review === "Weak Accept") {
+                this.state.reviewval = 3;
+            }
+            else if(this.state.review === "Borderline") {
+                this.state.reviewval = 4;
+            }
+            else if(this.state.review === "Weak Reject") {
+                this.state.reviewval = 5;
+            }
+            else if(this.state.review === "Reject") {
+                this.state.reviewval = 6;
             }
             else {
-                this.state.bidval = -1;
+                this.state.reviewval = 7;
             }
-            this.state.bidpaperid = paper_id;
-            this.state.bidconfid = conf_id;
-            this.state.biddate = this.getCurrentDate();
-            this.addBid();
+            this.state.reviewpaperid = paper_id;
+            this.state.reviewdate = this.getCurrentDate();
+            this.addReview();
         }
     }
 
     saveSelect(event) {
         const id = event.nativeEvent.target.selectedIndex;
         this.state.bid = event.nativeEvent.target[id].text;
-        console.log(this.state.bidjust);
+    }
+
+    saveSelectReview(event) {
+        const id = event.nativeEvent.target.selectedIndex;
+        this.state.review = event.nativeEvent.target[id].text;
     }
 
     render(){
@@ -202,7 +217,7 @@ export default class CommitteeDashboard extends Component{
 
                             {item.title}  Paper  <br/>
                             <p>Starting date:  { this.startingDate(item.conference_id) } { localStorage.getItem("starting_date_" + item.conference_id) } </p>
-                             <p>Bid deadline:  { this.bidDeadline(item.conference_id) } { localStorage.getItem("bid_deadline_" + item.conference_id) } </p>
+                            <p>Bid deadline:  { this.bidDeadline(item.conference_id) } { localStorage.getItem("bid_deadline_" + item.conference_id) } </p>
                             Keywords: {item.keywords}<br/>
                             Content:   <Link to={{ activeClassName:'idk', pathname: `/papers/${item.id}`, state: {
                                  id: item.id,
@@ -211,27 +226,31 @@ export default class CommitteeDashboard extends Component{
 
                              }}}  >View paper</Link>
 
-                             <br/><br/>
-                             {/*} <Button onClick={()=>this.openFile(item.content)}>View the paper</Button> {*/}
-                             {/* Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
+                             <br/><br/><br/>
+                             { Date.parse(this.getCurrentDate()) > Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
+                               Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("starting_date_" + item.conference_id)) && <h3>Leave review</h3> &&
 
-                                 <form onSubmit={() => this.handleSubmit2(item.id, item.conference_id)}>
+                                 <form onSubmit={() => this.handleSubmitReview(item.id, item.conference_id)}>
                                  <input type="text"
-                                        name={"bidjust" + item.id}
-                                        placeholder="motivate your choice"
-                                        value={this.state.bidjust}
+                                        name="reviewjust"
+                                        placeholder="Leave recommandations"
+                                        value={this.state.reviewjust}
                                         onChange={this.handleChange}
                                         required/><br/>
-                                 <select onChange={this.saveSelect}>
+                                 <select onChange={this.saveSelectReview}>
                                      <option value="blank"></option>
-                                     <option value="for">For</option>
-                                     <option value="against">Against</option>
-                                     <option value="indifferent">Indifferent</option>
+                                     <option value="strong_accept">Strong Accept</option>
+                                     <option value="accept">Accept</option>
+                                     <option value="weak_accept">Weak Accept</option>
+                                     <option value="borderline">Borderline</option>
+                                     <option value="strong_reject">Strong Reject</option>
+                                     <option value="reject">Reject</option>
+                                     <option value="weak_reject">Weak Reject</option>
                                  </select>
-                                 <button type="submit">Leave bid</button>
+                                 <button type="submit">Leave review</button>
                                      <br/><br/><br/>
                                  </form>
-                             */}
+                             }
                              { Date.parse(this.getCurrentDate()) < Date.parse(localStorage.getItem("bid_deadline_" + item.conference_id)) &&
                                  <form onSubmit={() => this.handleSubmitBid(item.id)}>
                                      <input type="text"

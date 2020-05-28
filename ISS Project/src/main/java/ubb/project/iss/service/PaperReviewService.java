@@ -12,6 +12,6 @@ public interface PaperReviewService {
     void sendDenialEmail(String to);
     void sendApprovalEmail(String to);
     void assignPapers(Long conferenceID);
-    void update(Long paperReviewID, Integer newRemark, String newRecommendation);
-    boolean checkIfApproved();
+    void update(PaperReview entity);
+    boolean checkIfApproved(Long paperID);
 }

@@ -75,13 +75,12 @@ function getBidDeadline(conference_id){
     axios.get('http://localhost:8080/api/conferences_bid/'+ conference_id, {
         conference_id: conference_id
     }).then((response) => {
-        console.log(response.data.bid_deadline);
        localStorage.setItem("bid_deadline_" + conference_id, response.data.bid_deadline);
     });
 }
 
 function getStartingDate(conference_id){
-    axios.get('http://localhost:8080/api/conferences_bid/'+ conference_id, {
+    axios.get('http://localhost:8080/api/conferences/'+ conference_id, {
         conference_id: conference_id
     }).then((response) => {
         localStorage.setItem("starting_date_" + conference_id, response.data.starting_date);
@@ -117,14 +116,24 @@ function settleBids(conf_id) {
     });
 }
 
+function areBidsSettled(conf_id) {
+    axios.get("http://localhost:8080/api/conferences/" + conf_id, {
+       id : conf_id
+    }).then(response => {
+        console.log(response.data.were_bids_settled);
+        localStorage.setItem("was_settled_" + conf_id, response.data.were_bids_settled);}
+    );
+}
+
 function doReviews(conf_id) {
-    axios.post("http://localhost:8080/api/do_reviews/" + conf_id, {
+    console.log("!!!!");
+    axios.get("http://localhost:8080/api/do_reviews/" + conf_id, {
         id : conf_id
-    });
+    }).catch(reason => console.log(reason));
 }
 
 module.exports = {
      addConference, updateConference,attendConference,
     addConferenceCommittee,addConferenceCommitteeMember,checkConferenceCommittee,
-    checkConferenceCommitteePaper,getBidDeadline, getStartingDate, settleBids, doReviews
+    checkConferenceCommitteePaper,getBidDeadline, getStartingDate, settleBids, doReviews, areBidsSettled
 };

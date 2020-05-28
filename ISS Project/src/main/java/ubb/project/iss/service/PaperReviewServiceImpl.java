@@ -97,59 +97,50 @@ public class PaperReviewServiceImpl implements PaperReviewService {
             return conferenceID.equals(paper.getConference_id());
         }).collect(Collectors.toList());
         List<Paper> papers = paperRepository.findAll().stream().filter(paper -> paper.getConference_id().equals(conferenceID)).collect(Collectors.toList());
-        List<Long> paperIDs = new ArrayList<Long>();
-        List<Long> bidIDs = new ArrayList<Long>();
 
-        for (long i = 1; i <= papers.size(); i++) {
-            paperIDs.add(i);
-        }
-
-        for (long i = 1; i <= paperBids.size(); i++) {
-            bidIDs.add(i);
-        }
-
-        for (Paper paper : papers) {
-            int numberOfReviewers = 0;
-            List<Long> willingReviewersIDs = new ArrayList<Long>();
-            List<Long> mehReviewersIDs = new ArrayList<Long>();
-            List<Long> candidates = new ArrayList<Long>();
-
-            for (Long id : bidIDs) {
-                PaperBid bid = paperBidService.getById(id);
-                if (bid.getPaper_id() == paper.getId() && bid.getBid_value() == 1) {
-                    willingReviewersIDs.add(bid.getMember_id());
+        for(Paper paper : papers)
+        {
+            int currentReviewers = 0;
+            List<PaperBid> bidsForThisPaper = paperBids.stream().filter(bid -> bid.getPaper_id() == paper.getId()).collect(Collectors.toList());
+            List<PaperBid> forBids = bidsForThisPaper.stream().filter(bid -> bid.getBid_value() == 1).collect(Collectors.toList());
+            List<PaperBid> againstBids = bidsForThisPaper.stream().filter(bid -> bid.getBid_value() == -1).collect(Collectors.toList());
+            List<PaperBid> indifferentBids = bidsForThisPaper.stream().filter(bid -> bid.getBid_value() == -0).collect(Collectors.toList());
+            for(int i = 0; i < Math.min(4, forBids.size()); i++)
+            {
+                paperReviewRepository.save(new PaperReview(forBids.get(i).getMember_id(),
+                                                               forBids.get(i).getPaper_id(),
+                                                               -1,
+                                                               ""));
+                    currentReviewers++;
+            }
+            if(currentReviewers < 2 && indifferentBids.size() != 0)
+            {
+                for(int i = 0; currentReviewers < 2 && i < indifferentBids.size(); i++)
+                {
+                    paperReviewRepository.save(new PaperReview(indifferentBids.get(i).getMember_id(),
+                            indifferentBids.get(i).getPaper_id(),
+                            -1,
+                            ""));
+                    currentReviewers++;
                 }
-                else if (bid.getPaper_id() == paper.getId() && bid.getBid_value() == 0) {
-                    mehReviewersIDs.add(bid.getMember_id());
+            }
+            if(currentReviewers < 2 && againstBids.size() != 0)
+            {
+                for(int i = 0; currentReviewers < 2 && i < againstBids.size(); i++)
+                {
+                    paperReviewRepository.save(new PaperReview(againstBids.get(i).getMember_id(),
+                            againstBids.get(i).getPaper_id(),
+                            -1,
+                            ""));
+                    currentReviewers++;
                 }
             }
-
-            while (willingReviewersIDs.size() > 0 && numberOfReviewers < 2){
-                Random rand = new Random();
-                Long reviewerID = willingReviewersIDs.get(rand.nextInt(willingReviewersIDs.size()));
-                willingReviewersIDs.remove(reviewerID);
-                numberOfReviewers ++;
-                candidates.add(reviewerID);
-            }
-
-            while (mehReviewersIDs.size() > 0 && numberOfReviewers < 2){
-                Random rand = new Random();
-                Long reviewerID = mehReviewersIDs.get(rand.nextInt(mehReviewersIDs.size()));
-                mehReviewersIDs.remove(reviewerID);
-                numberOfReviewers ++;
-                candidates.add(reviewerID);
-            }
-
-            if (numberOfReviewers == 2) {
-                PaperReview paperReview1 = new PaperReview(candidates.get(0), paper.getId(), -1, "");
-                PaperReview paperReview2 = new PaperReview(candidates.get(1), paper.getId(), -1, "");
-                this.save(paperReview1);
-                this.save(paperReview2);
-            }
-            else {
+            if(currentReviewers < 2)
+            {
                 UserAccount user = userService.getById(paper.getPublisher_id());
                 //denied
                 this.sendDenialEmail(user.getEmail());
+                paperRepository.deleteById(paper.getId());
             }
         }
     }
@@ -157,14 +148,16 @@ public class PaperReviewServiceImpl implements PaperReviewService {
     //folosim asta pentru "add", deoarece am folosit save-ul ca sa asignam paper-urile la evaluatori cu imiplicit remark -1
     @Override
     @Transactional
-    public void update(Long paperReviewID, Integer newRemark, String newRecommendation) {
-        this.getById(paperReviewID).setRemark(newRemark);
-        this.getById(paperReviewID).setRecommendations(newRecommendation);
+    public void update(PaperReview entity) {
+        PaperReview old = paperReviewRepository.findAll().stream().filter(paperReview -> paperReview.getMember_id() == entity.getMember_id() && paperReview.getPaper_id() == entity.getPaper_id()).collect(Collectors.toList()).get(0);
+        old.setRemark(entity.getRemark());
+        old.setRecommendations(entity.getRecommendations());
     }
 
-    public boolean checkIfApproved() {
+    @Override
+    public boolean checkIfApproved(Long paperID) {
         List<PaperReview> paperReviews = this.getAll();
-        List<Paper> papers = paperRepository.findAll();
+        List<Paper> papers = paperRepository.findAll().stream().filter(paper -> paper.getId().equals(paperID)).collect(Collectors.toList());
         List<Long> paperIDs = new ArrayList<Long>();
 
         for (Paper paper : papers) {
@@ -192,6 +185,7 @@ public class PaperReviewServiceImpl implements PaperReviewService {
             }
             else if (approvals == 0){
                 this.sendDenialEmail(userService.getById(paper.getPublisher_id()).getEmail());
+                paperRepository.deleteById(paper.getId());
                 return false;
             }
         }

@@ -28,9 +28,16 @@ public class PaperReviewController {
         return paperReviewService.getById(id);
     }
 
-    @RequestMapping(value ="/review_result/", method = RequestMethod.POST)
-    Boolean checkReview(){return paperReviewService.checkIfApproved();}
+    @RequestMapping(value ="/review_result/{id}", method = RequestMethod.POST)
+    Boolean checkReview(Long id){return paperReviewService.checkIfApproved(id);}
 
-    @RequestMapping(value="/do_reviews/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/paper_review", method = RequestMethod.PUT)
+    PaperReview update(@RequestBody PaperReview paperReview) {
+        paperReviewService.update(paperReview);
+        return paperReview;
+    }
+
+
+    @RequestMapping(value="/do_reviews/{id}", method = RequestMethod.GET)
     void doReviews(@PathVariable Long id){ paperReviewService.assignPapers(id); }
 }

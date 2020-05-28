@@ -56,13 +56,16 @@ function checkPaperSubmission(id){
 }
 
 function addReview(){
+    console.log(localStorage.loggedInUserID);
+    console.log(this.state.reviewpaperid);
+    console.log(this.state.reviewjust);
+    console.log(this.state.reviewval);
+    axios.put('http://localhost:8080/api/paper_review/', {
 
-    axios.post('http://localhost:8080/api/paper_review/', {
-
-        member_id: +this.state.member_id,
-        paper_id: +this.state.paper_id,
-        recommendations: this.state.recommendations,
-        remark: this.state.remark
+        member_id: localStorage.loggedInUserID,
+        paper_id: this.state.reviewpaperid,
+        recommendations: this.state.reviewjust,
+        remark: this.state.reviewval
 
     }).then((response) => {
         if (!response.data.isError) {
